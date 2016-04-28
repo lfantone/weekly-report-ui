@@ -1,0 +1,33 @@
+{
+  "name": "weekly-report-ui",
+  "description": "ng2 Weekly Report UI",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lfantone/weekly-report-ui.git"
+  },
+  "nativescript": {
+    "id": "org.nativescript.weeklyreportui",
+    "tns-ios": {
+      "version": "2.0.0"
+    },
+    "tns-android": {
+      "version": "2.0.0"
+    }
+  },
+  "dependencies": {
+    "angular2": "2.0.0-beta.14",
+    "nativescript-angular": "0.0.45",
+    "reflect-metadata": "^0.1.3",
+    "tns-core-modules": "^2.0.0 || 2.0.0-angular-6"
+  },
+  "devDependencies": {
+    "babel-traverse": "6.7.6",
+    "babel-types": "6.7.7",
+    "babylon": "6.7.0",
+    "filewalker": "0.1.2",
+    "lazy": "1.0.11",
+    "nativescript-dev-typescript": "^0.3.2",
+    "typescript": "^1.8.10"
+  }
+}

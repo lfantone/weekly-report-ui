@@ -1,0 +1,73 @@
+{
+  "nativescript": {
+    "id": "org.nativescript.helloworldng"
+  },
+  "name": "tns-template-hello-world-ng",
+  "main": "main.js",
+  "version": "2.0.0",
+  "author": {
+    "name": "Telerik",
+    "email": "support@telerik.com"
+  },
+  "description": "Nativescript Angular Hello World template",
+  "license": "BSD",
+  "keywords": [
+    "telerik",
+    "mobile",
+    "angular",
+    "nativescript",
+    "{N}",
+    "tns",
+    "appbuilder",
+    "template"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/NativeScript/template-hello-world-ng.git"
+  },
+  "homepage": "https://github.com/NativeScript/template-hello-world-ng",
+  "android": {
+    "v8Flags": "--expose_gc"
+  },
+  "dependencies": {
+    "angular2": "2.0.0-beta.14",
+    "nativescript-angular": "0.0.45",
+    "tns-core-modules": "^2.0.0 || 2.0.0-angular-6"
+  },
+  "devDependencies": {
+    "nativescript-dev-typescript": "^0.3.2"
+  },
+  "bugs": {
+    "url": "https://github.com/NativeScript/template-hello-world-ng/issues"
+  },
+  "_id": "tns-template-hello-world-ng@2.0.0",
+  "_shasum": "18d860e24815d2874fd56bdc16d217cd8dc8b588",
+  "_resolved": "https://registry.npmjs.org/tns-template-hello-world-ng/-/tns-template-hello-world-ng-2.0.0.tgz",
+  "_from": "tns-template-hello-world-ng@latest",
+  "scripts": {},
+  "_npmVersion": "3.7.3",
+  "_nodeVersion": "5.9.1",
+  "_npmUser": {
+    "name": "hdeshev",
+    "email": "hristo@deshev.com"
+  },
+  "dist": {
+    "shasum": "18d860e24815d2874fd56bdc16d217cd8dc8b588",
+    "tarball": "https://registry.npmjs.org/tns-template-hello-world-ng/-/tns-template-hello-world-ng-2.0.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "hdeshev",
+      "email": "hristo@deshev.com"
+    },
+    {
+      "name": "nsndeck",
+      "email": "nedyalko.nikolov@telerik.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/tns-template-hello-world-ng-2.0.0.tgz_1461745413310_0.33940312336198986"
+  },
+  "directories": {}
+}
