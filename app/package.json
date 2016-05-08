@@ -1,26 +1,24 @@
 {
 	"nativescript": {
-		"id": "org.nativescript.helloworldng"
+		"id": "org.nativescript.weekly"
 	},
-	"name": "tns-template-hello-world-ng",
+	"name": "weekly-report-ui",
 	"main": "main.js",
-	"version": "2.0.3",
-	"author": "Luciano Fantone <lucianoafantone@gmailcom>",
-	"description": "Nativescript Angular 2 Report App",
-	"license": "BSD",
+	"version": "1.0.0",
+	"description": "Weekly Report UI",
+	"license": "ISC",
 	"keywords": [
 		"telerik",
 		"mobile",
 		"angular",
 		"nativescript",
 		"{N}",
-		"tns"
+		"tns",
+		"appbuilder",
+		"template"
 	],
-	"repository": {
-    "type": "git",
-    "url": "https://github.com/lfantone/weekly-report-ui.git"
-  },
-	"homepage": "https://raw.githubusercontent.com/lfantone/weekly-report-ui/develop/README.md",
+	"repository": "lfantone/weekly-report-ui",
+	"homepage": "https://github.com/lfantone/weekly-report-ui",
 	"android": {
 		"v8Flags": "--expose_gc"
 	},
