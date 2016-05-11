@@ -18,17 +18,16 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('container') container: ElementRef;
   @ViewChild('email') email: ElementRef;
-  @ViewChild('password') password: ElementRef;
+  @ViewChild('username') password: ElementRef;
 
   constructor(private _router: Router, private _userService: UserService, private page: Page) {
     this.user = new User();
     this.user.email = 'user@evz.com.ar';
-    this.user.password = 'password';
+    this.user.username = 'password';
   }
 
   ngOnInit() {
     this.page.actionBarHidden = true;
-    this.page.backgroundImage = this.page.ios ? 'res://bg_login.jpg' : 'res://bg_login';
   }
 
   submit() {
