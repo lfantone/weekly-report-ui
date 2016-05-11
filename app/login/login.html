@@ -1,5 +1,5 @@
 <ActionBar title="">
-  <ActionItem ios.systemIcon="9" ios.position="right" text="test" android.position="popup"></ActionItem>
+  <ActionItem ios.systemIcon="9" ios.position="right" text="test" android.systemIcon="ic_menu_moreoverflow_normal_holo_light" android.position="popup"></ActionItem>
 </ActionBar>
 <StackLayout #container class="body">
   <Image class="logo" src="~/login/logo.png" horizontalAlignment="center" height="125" width="100%"></Image>
@@ -8,7 +8,7 @@
     autocorrect="false" autocapitalizationType="none"></TextField>
   <TextField #password hint="Clave" secure="true" [(ngModel)]="user.password"></TextField>
 
-  <Button text="Ingresar" class="login-button" (tap)="submit()"></Button>
+  <Button text="Ingresar" class="login-button" (tap)="submit()" color="white"></Button>
   <Label text="Olvidé mi clave" class="forgot-password"></Label>
   <Label text="Todos los derechos reservados" class="copyright"></Label>
 </StackLayout>

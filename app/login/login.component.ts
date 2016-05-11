@@ -44,9 +44,9 @@ export class LoginComponent implements OnInit {
 
   toggleDisplay() {
     let container = <View>this.container.nativeElement;
-    container.animate({
-      backgroundColor: new Color('white'),
-      duration: 200
-    });
+    // container.animate({
+    //   backgroundColor: new Color('white'),
+    //   duration: 200
+    // });
   }
 }
