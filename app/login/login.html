@@ -1,13 +1,8 @@
-<StackLayout #container>
-  <ActionBar title="Title" icon="">
-    <ActionItem (tap)="">
-      <Button class="" text="Left"></Button>
-    </ActionItem>
-    <ActionItem (tap)="" ios.position="right">
-      <Button class="" text="Right"></Button>
-    </ActionItem>
-  </ActionBar>
-  <Image class="logo" src="~/login/logo.png" horizontalAlignment="center" height="250px" width="100%"></Image>
+<ActionBar title="">
+  <ActionItem ios.systemIcon="9" ios.position="right" text="test" android.position="popup"></ActionItem>
+</ActionBar>
+<StackLayout #container class="body">
+  <Image class="logo" src="~/login/logo.png" horizontalAlignment="center" height="125" width="100%"></Image>
 
   <TextField #user hint="Usuario" keyboardType="email" [(ngModel)]="user.username"
     autocorrect="false" autocapitalizationType="none"></TextField>
@@ -15,5 +10,7 @@
 
   <Button text="Ingresar" class="login-button" (tap)="submit()"></Button>
   <Label text="Olvidé mi clave" class="forgot-password"></Label>
+  <Label text="Todos los derechos reservados" class="copyright"></Label>
 </StackLayout>
+
 
