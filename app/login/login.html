@@ -1,6 +1,12 @@
 <StackLayout #container>
-  <Label class="header"></Label>
-
+  <ActionBar title="Title" icon="">
+    <ActionItem (tap)="">
+      <Button class="" text="Left"></Button>
+    </ActionItem>
+    <ActionItem (tap)="" ios.position="right">
+      <Button class="" text="Right"></Button>
+    </ActionItem>
+  </ActionBar>
   <Image class="logo" src="~/login/logo.png" horizontalAlignment="center" height="250px" width="100%"></Image>
 
   <TextField #user hint="Usuario" keyboardType="email" [(ngModel)]="user.username"
@@ -10,3 +16,4 @@
   <Button text="Ingresar" class="login-button" (tap)="submit()"></Button>
   <Label text="Olvidé mi clave" class="forgot-password"></Label>
 </StackLayout>
+
