@@ -1,0 +1,14 @@
+<ActionBar title="Licitaciones">
+  <ActionItem text="test" android.systemIcon="ic_menu_share_holo_dark" ios.systemIcon="9" ios.position="right"></ActionItem>
+</ActionBar>
+
+<GridLayout>
+  <ListView [items]="tenders | async" (itemTap)="onItemTap($event)">
+      <template let-item="item" let-i="index" let-odd="odd" let-even="even">
+          <StackLayout [class.odd]="odd" [class.even]="even">
+              <Label [text]="item.program"></Label>
+              <Label [text]="item.code"></Label>
+          </StackLayout>
+      </template>
+  </ListView>
+</GridLayout>

@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {RouteConfig} from '@angular/router-deprecated';
+import {Component, OnInit} from '@angular/core';
+import {RouteConfig, Router} from '@angular/router-deprecated';
 import {NS_ROUTER_DIRECTIVES, NS_ROUTER_PROVIDERS} from 'nativescript-angular/router';
 import {LoginComponent} from './login/login.component';
-import {ReportComponent} from './report/report.component';
+import {TendersComponent} from './tenders/tenders.component';
 
 @Component({
   selector: 'evz-app',
@@ -11,9 +11,13 @@ import {ReportComponent} from './report/report.component';
   template: '<page-router-outlet></page-router-outlet>'
 })
 @RouteConfig([
-  { path: "/login", component: LoginComponent, name: 'Login', useAsDefault: true },
-  { path: "/report", component: ReportComponent, name: 'Rogin' },
+  { path: '/login', component: LoginComponent, name: 'Login' },
+  { path: '/tenders', component: TendersComponent, name: 'Tenders' },
 ])
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private router: Router) {}
 
+  ngOnInit() {
+    this.router.navigate(['Login']);
+  }
 }
