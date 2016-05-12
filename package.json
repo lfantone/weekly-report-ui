@@ -1,19 +1,18 @@
 {
-  "description": "ng2-ns-weekly-report",
+  "name": "weekly-report-ui",
+  "description": "Weekly Report UI",
   "license": "ISC",
-  "readme": "https://raw.githubusercontent.com/lfantone/weekly-report-ui/develop/README.md",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lfantone/weekly-report-ui.git"
-  },
+  "version": "1.0.0",
+  "readme": "https://github.com/lfantone/weekly-report-ui/blob/master/README.md",
+  "repository": "lfantone/weekly-report-ui",
   "nativescript": {
-    "id": "org.nativescript.weeklyreportui",
-    "tns-ios": {
-      "version": "2.0.0"
-    },
+    "id": "org.nativescript.weekly",
     "tns-android": {
       "version": "2.0.0"
-    }
+    },
+    "tns-ios": {
+			"version": "2.0.0"
+		}
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.1",
