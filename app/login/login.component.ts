@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   login() {
     this._userService.login(this.user)
       .subscribe(
-      () => this._router.navigate(['Form']),
+      () => this._router.navigate(['Tenders']),
       (error) => alert('Unfortunately we could not find your account.')
       );
   }

@@ -1,0 +1,20 @@
+<ActionBar title="LICITACIONES">
+  <ActionItem ios.systemIcon="9" ios.position="right" text="test" android.systemIcon="ic_menu_moreoverflow_normal_holo_light" android.position="popup"></ActionItem>
+</ActionBar>
+<StackLayout class="body">
+  <StackLayout class="title" orientation="horizontal">
+    <Label horizontalAlignment="left" text="Programa" width="70%"></Label>
+    <Label horizontalAlignment="right" text="Nro Lic" width="30%"></Label>
+  </StackLayout>
+  <GridLayout>
+    <ListView [items]="tenders | async" (itemTap)="onItemTap($event)">
+        <template let-item="item" let-i="index" let-odd="odd" let-even="even">
+            <StackLayout class="list-item" orientation="horizontal">
+                <Label class="list-item-leftt" [class.odd]="odd" [class.even]="even" horizontalAlignment="left" [text]="item.program" width="70%"></Label>
+                <Label class="list-item-right" [class.odd]="odd" [class.even]="even" horizontalAlignment="right" [text]="item.code" width="30%"></Label>
+            </StackLayout>
+        </template>
+    </ListView>
+  </GridLayout>
+</StackLayout>
+
