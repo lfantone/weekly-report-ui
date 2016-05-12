@@ -1,7 +1,36 @@
-.odd {
-    background-color: "red";
+ActionBar {
+  background-color:  #59bcaa;
+  color: white;
+}
+
+.body {
+  background-color: #6ac0c6;
 }
 
 .even {
-    background-color: "blue";
+  color: white;
+  background-color: #878787;
+}
+
+.odd {
+  color: #878787;
+  background-color: #f0f0f1;
+}
+
+.list-item > Label {
+  padding: 15 20;
+}
+
+.title {
+  color: white;
+  margin: 150 0 10 0;
+  font-size: 24;
+  padding-top: 10;
+  padding-bottom: 5;
+  text-transform: uppercase;
+}
+
+.title Label {
+  padding-left: 20;
+  text-transform: uppercase;
 }
