@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Tender} from './tender';
-import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/just';
 
-const TENDERS = [
+const TENDERS : Tender[] = [
   {
     id: 1,
     program: 'FREC 2016 Obras Individuales',
@@ -40,7 +41,8 @@ const TENDERS = [
     cui: '4634585679780',
     establishment: 'Escuela Secundaria No32 Mary O Graham',
     type: 'Rehabilitacion general',
-    lastReport: '25 Abril de 2016'
+    lastReport: '25 Abril de 2016',
+    title: 'Inet 47/15'
   },
   {
     id: 5,
@@ -68,13 +70,14 @@ const TENDERS = [
 export class TenderService {
   constructor() { }
 
-  fetch() : Observable<{ success: boolean, tenders: Tender[] }> {
+  fetch() : Observable<Tender[]> {
     return Observable.create(observer => {
-      observer.next({
-        success: true,
-        tenders: TENDERS
-      });
+      observer.next(TENDERS);
       observer.complete();
     });
+  }
+
+  fetchOne(id: number) : Observable<Tender> {
+    return Observable.of(TENDERS.filter((t) => t.id === id).pop());
   }
 }
