@@ -14,6 +14,12 @@
 			"version": "2.0.0"
 		}
   },
+  "scripts": {
+    "run.android": "tns run android --emulator",
+    "run.ios": "tns run ios --emulator",
+    "sync.android": "tns livesync android --emulator --watch",
+    "sync.ios": "tns livesync ios --emulator --watch"
+  },
   "dependencies": {
     "@angular/common": "2.0.0-rc.1",
     "@angular/compiler": "2.0.0-rc.1",
