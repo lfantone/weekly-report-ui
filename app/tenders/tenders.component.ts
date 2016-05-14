@@ -21,12 +21,9 @@ export class TendersComponent implements OnInit {
     this.tenders = this.tenderService.fetch();
   }
 
-  onItemTap(evt) {
-    let tender : Tender;
-    this.tenders.find((t) => {
-      tender = t[evt.index];
-      return true;
-    });
-    this._router.navigate(['Report', { id: tender.id }]);
+  onItemTap(evt : any) {
+    this.tenderService.fetch()
+      .map((tenders: Tender[]) => tenders[evt.index])
+      .subscribe((t : Tender) => this._router.navigate(['Report', { id: t.id }]));
   }
 }

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Tender} from './tender';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/just';
 
 const TENDERS : Tender[] = [
   {
