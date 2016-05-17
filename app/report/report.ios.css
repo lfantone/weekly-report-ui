@@ -1,0 +1,72 @@
+ActionBar {
+  background-color:  #59bcaa;
+  color: white;
+  text-transform: uppercase;
+}
+
+.body {
+  background-color: #f0f0f1;
+}
+
+.border {
+  border-color: #59bcaa;
+  border-width: 2;
+  height: 4;
+  width: 2;
+}
+
+.info-box {
+  background-color: #83d6c6;
+  padding: 25 50;
+  width: 100%;
+}
+
+.material-icon {
+  font-family: 'Material-Design-Iconic-Font';
+  margin-top: 3;
+  padding-right: 18;
+}
+
+.section-title {
+  background-color: #49a1b9;
+  color: white;
+  font-size: 22;
+  padding: 18 0 18 50;
+  z-index: 10;
+}
+
+.section-title .title {
+  padding-left: 20;
+}
+
+.slideInDown {
+  animation-name: slideInDown;
+  animation-duration: .5s;
+  animation-timing-function: ease-out
+}
+
+.sub-title {
+  color: #2a7063;
+}
+
+.text {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 15;
+}
+
+.visit-date, .state {
+  background-color: #f0f0f1;
+  width: 100%;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -60%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}

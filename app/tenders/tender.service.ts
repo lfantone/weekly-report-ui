@@ -76,7 +76,7 @@ export class TenderService {
     });
   }
 
-  fetchOne(id: number) : Observable<Tender> {
-    return Observable.of(TENDERS.filter((t) => t.id === id).pop());
+  fetchOne(id: string) : Observable<Tender> {
+    return Observable.of(TENDERS.filter((t) => t.id === parseInt(id, 10)).pop());
   }
 }

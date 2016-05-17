@@ -1,4 +1,66 @@
-<ActionBar title="ActionBar Style">
+<ActionBar title="{{ tender.value.title }}">
   <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
   <ActionItem ios.systemIcon="9" ios.position="right" text="test" android.systemIcon="ic_menu_moreoverflow_normal_holo_dark" android.position="popup"></ActionItem>
 </ActionBar>
+<ScrollView>
+  <StackLayout class="body">
+    <StackLayout class="info-box">
+      <Label class="sub-title" horizontalAlignment="left" text="CUI/CUP" textWrap="true"></Label>
+      <Label class="text" horizontalAlignment="left" text="{{ tender.value.cui }}" textWrap="true"></Label>
+
+      <Label class="sub-title" horizontalAlignment="left" text="ESTABLECIMIENTO" textWrap="true"></Label>
+      <Label class="text" horizontalAlignment="left" text="{{ tender.value.establishment }}" textWrap="true"></Label>
+
+      <Label class="sub-title" horizontalAlignment="left" text="TIPO DE OBRA" textWrap="true"></Label>
+      <Label class="text" horizontalAlignment="left" text="{{ tender.value.type }}" textWrap="true"></Label>
+
+      <Label class="sub-title" horizontalAlignment="left" text="FECHA INFORME ANTERIOR" textWrap="true"></Label>
+      <Label class="text" horizontalAlignment="left" text="{{ tender.value.lastReport }}" textWrap="true"></Label>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('visitDate')">
+      <Label horizontalAlignment="left" text="Fecha de Visita de Obra" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ visitDate ? '&#xf2fc;' : '&#xf2f9;'}}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+    <StackLayout class="visit-date" [class.slideInDown]="visitDate" [visibility]="visitDate ? 'visible' : 'collapsed'">
+        <DatePicker [day]="report.date.day" [month]="report.date.month" [year]="report.date.year"></DatePicker>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('state')">
+      <Label horizontalAlignment="left" text="Estado de la Obra" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ state ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+    <StackLayout class="state" [class.slideInDown]="state" [visibility]="state ? 'visible' : 'collapsed'">
+      <SegmentedBar [items]="[{title: 'Bueno'}, {title: 'Regular'}, {title: 'Malo'}]" [(ngModel)]="report.state.state"></SegmentedBar>
+      <Label horizontalAlignment="left" text="Razón de estado de la obra" textWrap="true"></Label>
+      <ListPicker [items]="['Ritmo normal']" [(ngModel)]="report.state.reason"></ListPicker>
+      <Label horizontalAlignment="left" text="Completar y/o ampliar motivos que conducen al ESTADO actual de la obra según interpreta el inspector" textWrap="true"></Label>
+      <TextView text="" editable="true" [(ngModel)]="report.state.comment"></TextView>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('progress')">
+      <Label horizontalAlignment="left" text="Avance de Obra" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ progress ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('evaluation')">
+      <Label horizontalAlignment="left" text="Evaluación del Contratista" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ evaluation ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('condition')">
+      <Label horizontalAlignment="left" text="Condición de la Semana" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ condition ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('doc')">
+      <Label horizontalAlignment="left" text="Doc. en Obra" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ doc ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('photos')">
+      <Label horizontalAlignment="left" text="Fotos y Comentarios" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ photos ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+  </StackLayout>
+</ScrollView>
