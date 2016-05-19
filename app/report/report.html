@@ -1,0 +1,135 @@
+<ActionBar title="{{ tender.value.title }}">
+  <NavigationButton android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+</ActionBar>
+<ScrollView>
+  <StackLayout class="body">
+    <StackLayout class="info-box">
+      <Label class="sub-title" horizontalAlignment="left" text="CUI/CUP" textWrap="true"></Label>
+      <Label class="text" horizontalAlignment="left" text="{{ tender.value.cui }}" textWrap="true"></Label>
+
+      <Label class="sub-title" horizontalAlignment="left" text="ESTABLECIMIENTO" textWrap="true"></Label>
+      <Label class="text" horizontalAlignment="left" text="{{ tender.value.establishment }}" textWrap="true"></Label>
+
+      <Label class="sub-title" horizontalAlignment="left" text="TIPO DE OBRA" textWrap="true"></Label>
+      <Label class="text" horizontalAlignment="left" text="{{ tender.value.type }}" textWrap="true"></Label>
+
+      <Label class="sub-title" horizontalAlignment="left" text="FECHA INFORME ANTERIOR" textWrap="true"></Label>
+      <Label class="text" horizontalAlignment="left" text="{{ tender.value.lastReport }}" textWrap="true"></Label>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('visitDate')">
+      <Label horizontalAlignment="left" text="Fecha de Visita de Obra" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ visitDate ? '&#xf2fc;' : '&#xf2f9;'}}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+    <StackLayout class="visit-date" [visibility]="visitDate ? 'visible' : 'collapsed'">
+        <DatePicker [day]="report.date.day" [month]="report.date.month" [year]="report.date.year"></DatePicker>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('state')">
+      <Label horizontalAlignment="left" text="Estado de la Obra" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ state ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+    <StackLayout class="state" [visibility]="state ? 'visible' : 'collapsed'">
+      <SegmentedBar selectedBackgroundColor="#B76769" [items]="[{title: 'Bueno'}, {title: 'Regular'}, {title: 'Malo'}]" [(ngModel)]="report.state.state"></SegmentedBar>
+      <Label horizontalAlignment="left" text="Razón de estado de la obra" textWrap="true"></Label>
+      <ListPicker [items]="['Sin Personal','Ritmo normal', 'Ritmo Lento', 'Interrupción Tareas', 'Lluvias y Consecuencias', 'Sin Materiales', 'Conflicto Gremial', 'Negligencia de empresa', 'Corte de Luz', 'Corte de Ruta']" [(ngModel)]="report.state.reason"></ListPicker>
+      <Label horizontalAlignment="left" text="Completar y/o ampliar motivos que conducen al ESTADO actual de la obra según interpreta el inspector" textWrap="true"></Label>
+      <TextView text="" editable="true" [(ngModel)]="report.state.comment"></TextView>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('progress')">
+      <Label horizontalAlignment="left" text="Avance de Obra" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ progress ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+    <StackLayout class="progress" [visibility]="progress ? 'visible' : 'collapsed'">
+      <StackLayout orientation="horizontal">
+        <Label class="progress-label" horizontalAlignment="left" text="Avance último certificado" textWrap="true" width="50%"></Label>
+        <Label horizontalAlignment="right" text="{{ report.progress.last }}" textWrap="true" width="50%"></Label>
+      </StackLayout>
+      <Slider [minValue]="0" [maxValue]="100" [value]="report.progress.last" [(ngModel)]="report.progress.last"></Slider>
+      <StackLayout orientation="horizontal">
+        <Label class="progress-label" horizontalAlignment="left" text="Certificación acumulada" textWrap="true" width="50%"></Label>
+        <Label horizontalAlignment="right" text="{{ report.progress.delta }}" textWrap="true" width="50%"></Label>
+      </StackLayout>
+      <Slider [minValue]="0" [maxValue]="100" [value]="report.progress.delta" [(ngModel)]="report.progress.delta"></Slider>
+      <Label horizontalAlignment="left" text="Razón de avance de la obra" textWrap="true"></Label>
+      <ListPicker [items]="['Sin Avance', 'Muy Bueno', 'Bueno', 'Normal', 'Regular', 'Malo']" [(ngModel)]="report.progress.reason"></ListPicker>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('evaluation')">
+      <Label horizontalAlignment="left" text="Evaluación del Contratista" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ evaluation ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+    <StackLayout class="evaluation" [visibility]="evaluation ? 'visible' : 'collapsed'">
+      <Label horizontalAlignment="left" text="Concepto de la obra" textWrap="true"></Label>
+      <ListPicker [items]="['Regular', 'Muy Bueno', 'Bueno', 'Normal','Malo']" [(ngModel)]="report.evaluation.concept"></ListPicker>
+      <Label horizontalAlignment="left" text="Calidad de la obra" textWrap="true"></Label>
+      <ListPicker [items]="['Regular', 'Muy Bueno', 'Bueno', 'Normal','Malo']" [(ngModel)]="report.evaluation.quality"></ListPicker>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('forecast')">
+      <Label horizontalAlignment="left" text="Condición de la Semana" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ forecast ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+    <StackLayout class="forecast" [visibility]="forecast ? 'visible' : 'collapsed'">
+      <Label class="date-title" horizontalAlignment="left" text="Última visita a la obra" textWrap="true"></Label>
+      <Label class="date" horizontalAlignment="left" text="{{ report.forecast.listVisit }}" textWrap="true"></Label>
+      <Label class="dark-background" horizontalAlignment="left" text="Visita Inspector" textWrap="true" width="100%"></Label>
+      <Label class="light-background" horizontalAlignment="left" text="Seleccione los días" textWrap="true" width="100%"></Label>
+      <StackLayout orientation="horizontal">
+        <Button class="date-btn" [class.active]="isDaySelected.monday" text="L" (tap)="onDayButtonTap('monday')"></Button>
+        <Button class="date-btn" [class.active]="isDaySelected.tuesday" text="M" (tap)="onDayButtonTap('tuesday')"></Button>
+        <Button class="date-btn" [class.active]="isDaySelected.wednesday" text="M" (tap)="onDayButtonTap('wednesday')"></Button>
+        <Button class="date-btn" [class.active]="isDaySelected.thursday" text="J" (tap)="onDayButtonTap('thursday')"></Button>
+        <Button class="date-btn" [class.active]="isDaySelected.friday" text="V" (tap)="onDayButtonTap('friday')"></Button>
+        <Button class="date-btn" [class.active]="isDaySelected.saturday" text="S" (tap)="onDayButtonTap('saturday')"></Button>
+        <Button class="date-btn" [class.active]="isDaySelected.sunday" text="D" (tap)="onDayButtonTap('sunday')"></Button>
+      </StackLayout>
+      <Label class="dark-background" horizontalAlignment="left" text="Lluvia" textWrap="true" width="100%"></Label>
+      <Label class="light-background" horizontalAlignment="left" text="Seleccione los días" textWrap="true" width="100%"></Label>
+      <StackLayout orientation="horizontal">
+        <Button class="date-btn" [class.active]="isRainSelected.monday" text="L" (tap)="onRainButtonTap('monday')"></Button>
+        <Button class="date-btn" [class.active]="isRainSelected.tuesday" text="M" (tap)="onRainButtonTap('tuesday')"></Button>
+        <Button class="date-btn" [class.active]="isRainSelected.wednesday" text="M" (tap)="onRainButtonTap('wednesday')"></Button>
+        <Button class="date-btn" [class.active]="isRainSelected.thursday" text="J" (tap)="onRainButtonTap('thursday')"></Button>
+        <Button class="date-btn" [class.active]="isRainSelected.friday" text="V" (tap)="onRainButtonTap('friday')"></Button>
+        <Button class="date-btn" [class.active]="isRainSelected.saturday" text="S" (tap)="onRainButtonTap('saturday')"></Button>
+        <Button class="date-btn" [class.active]="isRainSelected.sunday" text="D" (tap)="onRainButtonTap('sunday')"></Button>
+      </StackLayout>
+      <Label class="dark-background" horizontalAlignment="left" text="Auditorías" textWrap="true" width="100%"></Label>
+      <ListPicker [items]="['Estructuras', 'Instalaciones', 'Supervisor', 'Coord. Programa', 'Nación', 'UCO', 'AUTORIDADES', 'SIN VISITAS EXTERNAS']"></ListPicker>
+      <DatePicker [day]="report.date.day" [month]="report.date.month" [year]="report.date.year"></DatePicker>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('doc')">
+      <Label horizontalAlignment="left" text="Doc. en Obra" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ doc ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+    <StackLayout class="doc" [visibility]="doc ? 'visible' : 'collapsed'">
+      <StackLayout class="doc-quantity-box" orientation="horizontal">
+          <Label class="doc-quantity-title" horizontalAlignment="left" text="Cantidad de Órdenes de Servicio" textWrap="true"></Label>
+          <TextField hint="Cantidad de Órdenes de Servicio" horizontalAlignment="right" text="{{ report.doc.quantity }}" keyboardType="phone" [(ngModel)]="report.doc.quantity"></TextField>
+      </StackLayout>
+      <Label horizontalAlignment="left" text="Libro de Obra" textWrap="true"></Label>
+      <ListPicker [items]="['Si', 'No', 'Incompleto']" [(ngModel)]="report.doc.book"></ListPicker>
+    </StackLayout>
+
+    <StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap('photos')">
+      <Label horizontalAlignment="left" text="Fotos y Comentarios" textWrap="true" width="75%"></Label>
+      <Label class="material-icon" horizontalAlignment="right" text="{{ photos ? '&#xf2fc;' : '&#xf2f9;' }}" textWrap="true" width="25%"></Label>
+    </StackLayout>
+    <StackLayout class="photos" [visibility]="photos ? 'visible' : 'collapsed'">
+      <StackLayout orientation="horizontal">
+          <Image class="thumbnail" src="~/report/no-image.png" horizontalAlignment="left" height="80" width="80"></Image>
+          <StackLayout class="input-box">
+            <TextField hint="Título Foto 1" text=""></TextField>
+            <TextField hint="Comentario de la foto" text=""></TextField>
+          </StackLayout>
+          <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onCameraTest()"></Button>
+      </StackLayout>
+    </StackLayout>
+
+    <Button class="save-btn material-icon" text="&#xf297; Guardar Informe" (tap)="onDateButtonTap(10)"></Button>
+    <Button class="send-btn material-icon" text="&#xf194; Enviar Informe" (tap)="onDateButtonTap(11)"></Button>
+  </StackLayout>
+</ScrollView>

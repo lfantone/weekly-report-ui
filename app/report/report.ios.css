@@ -1,0 +1,182 @@
+ActionBar {
+  background-color:  #59bcaa;
+  color: white;
+  text-transform: uppercase;
+}
+
+.active {
+  animation-name: changeColor;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.body {
+  background-color: #f0f0f1;
+}
+
+.border {
+  border-color: #59bcaa;
+  border-width: 2;
+  height: 4;
+  width: 2;
+}
+
+.blue {
+  background-color: #4e6f97;
+}
+
+.btn-box {
+  padding: 5;
+}
+
+.save-btn, .send-btn {
+  background-color: #5db49e;
+  color: white;
+  font-size: 16;
+  margin: 10 0 0 0 ;
+  padding: 10 40;
+  width: 100%;
+}
+
+.doc-quantity-box {
+  margin-bottom: 20;
+}
+
+.doc-quantity-title {
+  margin-right: 60;
+}
+
+.dark-background {
+  color: white;
+  background-color: #878787;
+  text-transform: uppercase;
+  padding: 10;
+}
+
+.date {
+  margin-bottom: 20;
+  font-size: 14;
+  font-weight: 700;
+}
+
+.date-btn {
+  font-size: 20;
+  font-weight: 700;
+  height: 50;
+  width: 50;
+  background-color: #f0f0f1;
+}
+
+.date-title {
+  font-size: 10;
+  text-transform: uppercase;
+}
+
+.edit-btn {
+  background-color: #f0f0f1;
+  color: #878787;
+  font-size: 15;
+  margin-left: 10;
+  padding: 10 15;
+  height: 60;
+  width: 60;
+}
+
+.info-box {
+  background-color: #83d6c6;
+  padding: 25 50;
+  width: 100%;
+}
+
+.green {
+  background-color: #61b34c;
+}
+
+.light-background {
+  background-color: #e5e5e0;
+  color: #878787;
+  font-style: italic;
+  padding: 10;
+}
+
+.input-box {
+  margin: 0 10;
+  padding: 10;
+}
+
+.material-icon {
+  font-family: 'Material-Design-Iconic-Font';
+  margin-top: 3;
+  padding-right: 18;
+}
+
+.red {
+  background-color: #c6575b;
+}
+
+.progress Slider {
+  margin: 20 0;
+}
+
+.progress-label {
+  margin-right: 50;
+}
+
+.section-title {
+  background-color: #49a1b9;
+  color: white;
+  font-size: 22;
+  padding: 18 0 18 50;
+  z-index: 10;
+}
+
+.section-title .title {
+  padding-left: 20;
+}
+
+.slideInDown {
+  animation-name: slideInDown;
+  animation-duration: .5s;
+  animation-timing-function: ease-out
+}
+
+.state SegmentedBar {
+  margin-bottom: 10;
+}
+
+.sub-title {
+  color: #2a7063;
+}
+
+.text {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 15;
+}
+
+.visit-date, .state, .progress,
+.evaluation, .forecast, .doc, .photos {
+  background-color: #f0f0f1;
+  padding: 15 20;
+  width: 100%;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -60%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes changeColor {
+  from {
+    background-color: #f0f0f1;
+  }
+  to {
+    background-color: #5db49e;
+  }
+}

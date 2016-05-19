@@ -1,7 +1,10 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Router} from '@angular/router-deprecated';
 import {TenderService} from './tender.service';
 import {Tender} from './tender';
-import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/find';
+
 
 @Component({
   selector: 'evz-tenders',
@@ -12,15 +15,15 @@ import {Observable} from 'rxjs/Rx';
 })
 export class TendersComponent implements OnInit {
   tenders: Observable<Tender[]>;
-  constructor(private tenderService: TenderService) { }
+  constructor(private _router: Router, private tenderService: TenderService) { }
 
   ngOnInit() {
-    this.tenders = this.tenderService.fetch()
-      .map(result => result.tenders);
+    this.tenders = this.tenderService.fetch();
   }
 
-  onItemTap(args) {
-    console.log("------------------------ ItemTapped: " + args.index);
+  onItemTap(evt : any) {
+    this.tenderService.fetch()
+      .map((tenders: Tender[]) => tenders[evt.index])
+      .subscribe((t : Tender) => this._router.navigate(['Report', { id: t.id }]));
   }
-
 }

@@ -37,16 +37,16 @@ export class LoginComponent implements OnInit {
   login() {
     this._userService.login(this.user)
       .subscribe(
-      () => this._router.navigate(['Tenders']),
-      (error) => alert('Unfortunately we could not find your account.')
+        () => this._router.navigate(['Tenders']),
+        (error) => alert('Unfortunately we could not find your account.')
       );
   }
 
   toggleDisplay() {
     let container = <View>this.container.nativeElement;
-    // container.animate({
-    //   backgroundColor: new Color('white'),
-    //   duration: 200
-    // });
+    container.animate({
+      backgroundColor: new Color('white'),
+      duration: 200
+    });
   }
 }
