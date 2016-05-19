@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RouteParams} from '@angular/router-deprecated';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs/Rx';
+import cameraModule = require('camera');
 
 import {ReportService} from './report.service';
 import {TenderService} from '../tenders/tender.service';
@@ -21,9 +22,11 @@ export class ReportComponent implements OnInit {
   state: boolean;
   progress: boolean;
   evaluation: boolean;
-  condition: boolean;
+  forecast: boolean;
   doc: boolean;
   photos: boolean;
+  isDaySelected: Object;
+  isRainSelected: Object;
   constructor(
     private location: Location,
     private params: RouteParams,
@@ -44,19 +47,61 @@ export class ReportComponent implements OnInit {
         reason: '',
         comment: ''
       },
-      progress: {},
-      evaluation: {},
-      condition: {},
-      doc: {},
-      photos: {}
+      progress: {
+        last: 0,
+        delta: 0,
+        reason: ''
+      },
+      evaluation: {
+        concept: '',
+        quality: ''
+      },
+      forecast: {
+        listVisit: date.toDateString(),
+        inspector: [],
+        rain: [],
+        audit: [{
+          sector: '',
+          date: date
+        }]
+      },
+      doc: {
+        quantity: 0,
+        book: ''
+      },
+      photos: [{
+        title: '',
+        comment: '',
+        path: ''
+      }]
     };
     this.visitDate = false;
     this.state = false;
     this.progress = false;
     this.evaluation = false;
-    this.condition = false;
+    this.forecast = false;
     this.doc = false;
     this.photos = false;
+
+    this.isDaySelected = {
+      monday: false,
+      tuesday: false,
+      wednesday: false,
+      thursday: false,
+      friday: false,
+      saturday: false,
+      sunday: false,
+    };
+
+    this.isRainSelected = {
+      monday: false,
+      tuesday: false,
+      wednesday: false,
+      thursday: false,
+      friday: false,
+      saturday: false,
+      sunday: false,
+    };
   }
 
   ngOnInit() { }
@@ -66,8 +111,26 @@ export class ReportComponent implements OnInit {
   }
 
   public onItemTap(name) {
-    console.log('Tapped', name);
-
     this[name] = !this[name];
+  }
+
+  public onStateButtonTab() {
+    console.log('Tapped', arguments);
+  }
+
+  public onDayButtonTap(day) {
+    this.isDaySelected[day] = !this.isDaySelected[day];
+  }
+
+  public onRainButtonTap(day) {
+    console.log(day, 'tapped');
+    this.isRainSelected[day] = !this.isRainSelected[day];
+  }
+
+  public onCameraTest() {
+    console.log(cameraModule, 'tapped photo !');
+    cameraModule.takePicture().then(picture => {
+      console.log('Result is an image source instance', picture);
+    });
   }
 }
