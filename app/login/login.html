@@ -1,14 +1,12 @@
 <ActionBar title=""></ActionBar>
 <StackLayout #container class="body">
-  <Image class="logo" src="~/login/logo.png" horizontalAlignment="center" height="125" width="100%"></Image>
+  <Image class="logo" src="res://logo" horizontalAlignment="center" height="200" width="100%"></Image>
 
-  <TextField #user hint="Usuario" keyboardType="email" [(ngModel)]="user.username"
+  <TextField #user [hint]="t.get('login.hints.user')" keyboardType="email" [(ngModel)]="user.username"
     autocorrect="false" autocapitalizationType="none"></TextField>
-  <TextField #password hint="Clave" secure="true" [(ngModel)]="user.password"></TextField>
+  <TextField #password [hint]="t.get('login.hints.password')" secure="true" [(ngModel)]="user.password"></TextField>
 
-  <Button text="Ingresar" class="login-button" (tap)="submit()" color="white"></Button>
-  <Label text="Olvidé mi clave" class="forgot-password"></Label>
-  <Label text="Todos los derechos reservados" class="copyright"></Label>
+  <Button [text]="t.get('login.submit')" class="login-button" (tap)="submit()" color="white"></Button>
+  <Label [text]="t.get('login.forgot')" class="forgot-password"></Label>
+  <Label [text]="t.get('login.copyright')" class="copyright"></Label>
 </StackLayout>
-
-

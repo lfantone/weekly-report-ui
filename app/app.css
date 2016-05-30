@@ -1,4 +1,9 @@
-﻿button, label, stack-layout {
+﻿ActionBar {
+  background-color:  #FDCA2E;
+  color: black;
+}
+
+button, label {
   horizontal-align: center;
 }
 

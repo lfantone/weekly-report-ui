@@ -1,0 +1,78 @@
+{
+  "login": {
+    "hints": {
+      "user": "Usuario",
+      "password": "Clave"
+    },
+    "submit": "Ingresar",
+    "forgot": "Olvidé mi clave",
+    "copyright": "Todos los derechos reservados"
+  },
+  "tenders": {
+    "title": "REPORTE SEMANAL"
+  },
+  "report": {
+    "information": {
+      "cui": "CUI/CUP",
+      "establishment": "ESTABLECIMIENTO",
+      "type": "TIPO DE OBRA",
+      "last": "FECHA INFORME ANTERIOR"
+    },
+    "section": {
+      "visit": "Fecha de Visitia de Obra",
+      "state": "Estado de la Obra",
+      "progress": "Avance de la Obra",
+      "evaluation": "Evaluación del Contratista",
+      "forecast": "Condición de la semana",
+      "doc": "Doc. en Obra",
+      "photos": "Fotos y Comentarios"
+    },
+    "state": {
+      "good": "Bueno",
+      "regular": "Regular",
+      "bad": "Malo",
+      "reason": "Razón de estado de la obra",
+      "list": ["Sin Personal", "Ritmo Normal", "Ritmo Lento", "Interrupcioón Tareas", "Lluvias y Consecuencias", "Sin Materiales", "Conflicto Gremial", "Negligencia de empresa", "Corte de Luz", "Corte de Ruta"],
+      "comment": "Completar y/o ampliar motivos que conducen al ESTADO actual de la obra según interpreta el inspector"
+    },
+    "progress": {
+      "last": "Avance último certificado",
+      "delta": "Certificación acumulada",
+      "reason": "Razón de avance de la obra",
+      "list": ["Sin Avance", "Muy Bueno", "Bueno", "Normal", "Regular", "Malo"]
+    },
+    "evaluation": {
+      "concept": "Concepto de la obra",
+      "quality": "Calidad de la obra",
+      "list": ["Regular", "Muy Bueno", "Bueno", "Normal", "Malo"]
+    },
+    "forecast": {
+      "visit": "Última visita a la obra",
+      "inspector": "Visita Inspector",
+      "days": "Seleccione los días",
+      "day": {
+        "monday": "L",
+        "tuesday": "M",
+        "wednesday": "M",
+        "thursday": "J",
+        "friday": "V",
+        "saturday": "S",
+        "sunday": "D"
+      },
+      "rain": "Lluvia",
+      "audits": "Auditorías",
+      "list": ["Estructuras", "Instalaciones", "Supervisor", "Coord. Programa", "Nación", "UCO", "AUTORIDADES", "SIN VISITAS EXTERNAS"]
+    },
+    "doc": {
+      "quantity": "Cantidad de Órdenes de Servicio",
+      "book": "Libro de Obra",
+      "list": ["Si", "No", "Incompleto"]
+    },
+    "photo": {
+      "title": "Título Foto",
+      "comment": "Comentatio de la foto"
+    },
+    "save": "Guardar Informe",
+    "send": "Enviar Informe"
+  }
+}

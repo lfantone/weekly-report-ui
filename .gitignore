@@ -265,3 +265,6 @@ typings
 hooks/
 platforms/
 typings/
+
+cache.*
+*.bin

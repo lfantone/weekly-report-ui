@@ -1,32 +1,35 @@
-import {Component, OnInit} from '@angular/core';
-import {RouteParams} from '@angular/router-deprecated';
-import {Location} from '@angular/common';
-import {Observable} from 'rxjs/Rx';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { RouteParams } from '@angular/router-deprecated';
+import { Location } from '@angular/common';
+import { Observable } from 'rxjs/Rx';
+import { Page } from 'ui/page';
 import cameraModule = require('camera');
 
-import {ReportService} from './report.service';
-import {TenderService} from '../tenders/tender.service';
-import {Tender} from '../tenders/tender';
-import {Report} from './report';
+import { InformationComponent } from './information/information.component';
+import { ReportService } from './report.service';
+import { SectionComponent } from './section/section.component';
+import { TenderService } from '../tenders/tender.service';
+import { Tender } from '../tenders/tender';
+import { Translations } from '../translations';
+import { Report } from './report';
 
 @Component({
+  directives: [InformationComponent, SectionComponent],
   selector: 'evz-report',
   templateUrl: 'report/report.html',
   styleUrls: ['report/report.css'],
   providers: [ReportService, TenderService]
 })
 export class ReportComponent implements OnInit {
-  report: Object;
+  @ViewChild('photo') photo: ElementRef;
+
+  report: any;
   tender: any;
-  visitDate: boolean;
-  state: boolean;
-  progress: boolean;
-  evaluation: boolean;
-  forecast: boolean;
-  doc: boolean;
-  photos: boolean;
+  t: Object;
+
   isDaySelected: Object;
   isRainSelected: Object;
+  isSegmentedBtnActive: Object;
   constructor(
     private location: Location,
     private params: RouteParams,
@@ -75,13 +78,6 @@ export class ReportComponent implements OnInit {
         path: ''
       }]
     };
-    this.visitDate = false;
-    this.state = false;
-    this.progress = false;
-    this.evaluation = false;
-    this.forecast = false;
-    this.doc = false;
-    this.photos = false;
 
     this.isDaySelected = {
       monday: false,
@@ -102,6 +98,13 @@ export class ReportComponent implements OnInit {
       saturday: false,
       sunday: false,
     };
+
+    this.isSegmentedBtnActive = {
+      good: true,
+      regular: false,
+      bad: false
+    }
+    this.t = new Translations();
   }
 
   ngOnInit() { }
@@ -110,15 +113,12 @@ export class ReportComponent implements OnInit {
     this.location.back();
   }
 
-  public onItemTap(name) {
-    this[name] = !this[name];
-  }
-
   public onStateButtonTab() {
     console.log('Tapped', arguments);
   }
 
   public onDayButtonTap(day) {
+    console.log(day, 'tapped');
     this.isDaySelected[day] = !this.isDaySelected[day];
   }
 
@@ -128,9 +128,34 @@ export class ReportComponent implements OnInit {
   }
 
   public onCameraTest() {
-    console.log(cameraModule, 'tapped photo !');
-    cameraModule.takePicture().then(picture => {
-      console.log('Result is an image source instance', picture);
+    let image = this.photo.nativeElement;
+    console.log('tapped photo !');
+    cameraModule.takePicture({width: 1024, height: 768, keepAspectRatio: true}).then(picture => {
+      image.imageSource = picture;
     });
+  }
+
+  public onSaveButtonTap() {
+    console.log('save !');
+  }
+
+  /**
+   * onSendButtonTap
+   */
+  public onSendButtonTap() {
+    console.log('send !');
+  }
+
+  /**
+   * onSegmentedButtonTap
+   */
+  public onSegmentedButtonTap(name) {
+    for (let key in this.isSegmentedBtnActive) {
+      if (this.isSegmentedBtnActive.hasOwnProperty(key)) {
+        this.isSegmentedBtnActive[key] = false;
+      }
+    }
+    this.isSegmentedBtnActive[name] = !this.isSegmentedBtnActive[name];
+    this.report.state.state = name;
   }
 }

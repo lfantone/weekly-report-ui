@@ -1,0 +1,25 @@
+.border {
+  background-color: #FEDD32;
+  height: 100%;
+  width: 6;
+}
+
+.box {
+  padding: 10 0;
+}
+
+.details {
+  margin-left: 10;
+}
+
+.details .title {
+  color: black;
+  font-size: 16;
+  font-weight: 700;
+  margin: 0;
+}
+
+.details .sub-title {
+  color: #898989;
+  margin: 0;
+}

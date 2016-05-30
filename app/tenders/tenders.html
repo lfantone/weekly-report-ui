@@ -1,18 +1,7 @@
-<ActionBar title="LICITACIONES"></ActionBar>
-<StackLayout class="body">
-  <StackLayout class="title" orientation="horizontal">
-    <Label horizontalAlignment="left" text="Programa" width="70%"></Label>
-    <Label horizontalAlignment="right" text="Nro Lic" width="30%"></Label>
+<ActionBar android.icon="res://title" android.iconVisibility="always" [title]="t.get('tenders.title')"></ActionBar>
+<ScrollView>
+  <StackLayout class="body">
+    <evz-tender-list [tenders]="tenders | async"></evz-tender-list>
   </StackLayout>
-  <GridLayout>
-    <ListView [items]="tenders | async" (itemTap)="onItemTap($event)">
-        <template let-item="item" let-i="index" let-odd="odd" let-even="even">
-            <StackLayout class="list-item" [class.odd]="odd" [class.even]="even" orientation="horizontal">
-                <Label horizontalAlignment="left" [text]="item.program" width="70%"></Label>
-                <Label class="list-item-right" horizontalAlignment="right" [text]="item.code" width="30%"></Label>
-            </StackLayout>
-        </template>
-    </ListView>
-  </GridLayout>
-</StackLayout>
+</ScrollView>
 

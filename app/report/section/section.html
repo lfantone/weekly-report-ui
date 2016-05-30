@@ -1,0 +1,7 @@
+<StackLayout class="section-title" orientation="horizontal" (tap)="onItemTap()">
+  <Label horizontalAlignment="left" [text]="title" textWrap="true" width="75%"></Label>
+  <Label class="material-icon" horizontalAlignment="right" text="{{ collapse ? '&#xf2fc;' : '&#xf2f9;'}}" textWrap="true" width="25%"></Label>
+</StackLayout>
+<StackLayout #box class="section-box" [visibility]="collapse ? 'visible' : 'collapsed'">
+  <ng-content></ng-content>
+</StackLayout>

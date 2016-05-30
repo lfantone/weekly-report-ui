@@ -1,0 +1,8 @@
+<StackLayout class="card" orientation="horizontal" *ngFor="let item of tenders" (tap)="onItemTap(item)">
+  <Label class="border red" horizontalAlignment="left"></Label>
+  <StackLayout class="card-details" horizontalAlignment="left">
+    <Label class="title" horizontalAlignment="left" [text]="item.program" textWrap="true"></Label>
+    <Label class="sub-title" horizontalAlignment="left" verticalAlignment="bottom" [text]="item.establishment" textWrap="true"></Label>
+  </StackLayout>
+  <Label class="card-code" [text]="item.code" horizontalAlignment="right" textWrap="true"></Label>
+</StackLayout>

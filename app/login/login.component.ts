@@ -1,11 +1,13 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
-import {Color} from 'color';
-import {Page} from 'ui/page';
-import {TextField} from 'ui/text-field';
-import {View} from 'ui/core/view';
-import {User} from '../user/user';
-import {UserService} from '../user/user.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
+import { Color } from 'color';
+import { Page } from 'ui/page';
+import { TextField } from 'ui/text-field';
+import { View } from 'ui/core/view';
+
+import { User } from '../user/user';
+import { UserService } from '../user/user.service';
+import { Translations } from '../translations';
 
 @Component({
   selector: 'evz-login',
@@ -15,7 +17,7 @@ import {UserService} from '../user/user.service';
 })
 export class LoginComponent implements OnInit {
   private user: User;
-
+  private t: Object;
   @ViewChild('container') container: ElementRef;
   @ViewChild('email') email: ElementRef;
   @ViewChild('username') password: ElementRef;
@@ -24,6 +26,8 @@ export class LoginComponent implements OnInit {
     this.user = new User();
     this.user.email = 'user@evz.com.ar';
     this.user.username = 'password';
+
+    this.t = new Translations();
   }
 
   ngOnInit() {

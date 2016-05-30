@@ -1,0 +1,27 @@
+.material-icon {
+  font-family: 'Material-Design-Iconic-Font';
+  margin-top: 3;
+  padding-right: 18;
+}
+
+.section-box {
+  background-color: #F9F9F9;
+  padding: 15 30;
+  width: 100%;
+}
+
+.section-title {
+  background-color: #3D718B;
+  color: white;
+  font-size: 22;
+  padding: 18 0 18 50;
+  z-index: 10;
+}
+
+.section-title .title {
+  padding-left: 20;
+}
+
+#content {
+  height: 0;
+}

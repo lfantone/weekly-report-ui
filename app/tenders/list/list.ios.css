@@ -1,0 +1,50 @@
+.border {
+  height: 100%;
+  width: 6;
+}
+
+.card {
+  background-color: #FFF;
+  background-image: url('res://dialog_holo_light_frame');
+  margin: 10 0;
+}
+
+.card-code {
+  color: #898989;
+  margin-top: 40;
+  font-size: 16;
+  font-weight: 700;
+}
+
+.card-details {
+  margin-left: 10;
+  padding: 20 10;
+}
+
+.card-details .title {
+  color: black;
+  font-size: 16;
+  font-weight: 700;
+  margin: 0;
+}
+
+.card-details .sub-title {
+  color: #898989;
+  margin: 0;
+}
+
+.red {
+  background-color: #EA252B;
+}
+
+.green {
+  background-color: #1CB76C;
+}
+
+.yellow {
+  background-color: #FEDD32;
+}
+
+.container-title {
+  margin: 15
+}
