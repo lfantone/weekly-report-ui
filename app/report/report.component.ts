@@ -76,6 +76,26 @@ export class ReportComponent implements OnInit {
         title: '',
         comment: '',
         path: ''
+      }, {
+        title: '',
+        comment: '',
+        path: ''
+      }, {
+        title: '',
+        comment: '',
+        path: ''
+      }, {
+        title: '',
+        comment: '',
+        path: ''
+      }, {
+        title: '',
+        comment: '',
+        path: ''
+      }, {
+        title: '',
+        comment: '',
+        path: ''
       }]
     };
 
@@ -100,8 +120,8 @@ export class ReportComponent implements OnInit {
     };
 
     this.isSegmentedBtnActive = {
-      good: true,
-      regular: false,
+      good: false,
+      regular: true,
       bad: false
     }
     this.t = new Translations();

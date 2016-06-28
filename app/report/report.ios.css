@@ -43,8 +43,8 @@
 .date-btn {
   font-size: 20;
   font-weight: 700;
-  height: 50;
-  width: 50;
+  height: 45;
+  width: 45;
   background-color: #BABABA;
 }
 
@@ -72,10 +72,8 @@
   background-color: #f0f0f1;
   color: #878787;
   font-size: 15;
-  margin-left: 10;
-  padding: 10 15;
-  height: 60;
-  width: 60;
+  height: 40;
+  padding: 0 20;
 }
 
 .green-btn {
@@ -92,6 +90,10 @@
 .input-box {
   margin: 0 10;
   padding: 10;
+}
+
+.margin-top {
+  margin-top: 25;
 }
 
 .material-icon {
@@ -128,7 +130,7 @@
   width: 33%;
 }
 
-.segmented-btn-active {
+.segmented-btn-active, .active {
   color: black;
 }
 

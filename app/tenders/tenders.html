@@ -1,7 +1,9 @@
 <ActionBar android.icon="res://title" android.iconVisibility="always" [title]="t.get('tenders.title')"></ActionBar>
-<ScrollView>
-  <StackLayout class="body">
-    <evz-tender-list [tenders]="tenders | async"></evz-tender-list>
-  </StackLayout>
-</ScrollView>
+<PullToRefresh #refresh (refresh)="refreshList($event)">
+  <ScrollView>
+    <StackLayout class="body">
+      <evz-tender-list [tenders]="tenders | async"></evz-tender-list>
+    </StackLayout>
+  </ScrollView>
+</PullToRefresh>
 

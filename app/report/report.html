@@ -17,17 +17,17 @@
     <evz-section [title]="t.get('report.section.state')" [collapse]="false">
       <StackLayout>
         <StackLayout orientation="horizontal">
-          <Button class="segmented-btn green-btn segmented-btn-active" horizontalAlignment="left" [class.segmented-btn-active]="isSegmentedBtnActive.good" (tap)="onSegmentedButtonTap('good')" [text]="t.get('report.state.good')"></Button>
+          <Button class="segmented-btn green-btn" horizontalAlignment="left" [class.active]="isSegmentedBtnActive.good" (tap)="onSegmentedButtonTap('good')" [text]="t.get('report.state.good')"></Button>
           <Button class="segmented-btn yellow-btn" horizontalAlignment="center" [class.segmented-btn-active]="isSegmentedBtnActive.regular" (tap)="onSegmentedButtonTap('regular')" [text]="t.get('report.state.regular')"></Button>
           <Button class="segmented-btn red-btn" horizontalAlignment="right" [class.segmented-btn-active]="isSegmentedBtnActive.bad" (tap)="onSegmentedButtonTap('bad')" [text]="t.get('report.state.bad')"></Button>
         </StackLayout>
         <StackLayout orientation="horizontal">
-          <Label class="border-bottom border-bottom-active" [class.border-bottom-active]="isSegmentedBtnActive.good" horizontalAlignment="left"></Label>
+          <Label class="border-bottom" [class.border-bottom-active]="isSegmentedBtnActive.good" horizontalAlignment="left"></Label>
           <Label class="border-bottom" [class.border-bottom-active]="isSegmentedBtnActive.regular" horizontalAlignment="center"></Label>
           <Label class="border-bottom" [class.border-bottom-active]="isSegmentedBtnActive.bad" horizontalAlignment="right"></Label>
         </StackLayout>
       </StackLayout>
-      <Label horizontalAlignment="left" [text]="t.get('report.state.reason')" textWrap="true"></Label>
+      <Label class="margin-top" horizontalAlignment="left" [text]="t.get('report.state.reason')" textWrap="true"></Label>
       <ListPicker [items]="t.get('report.state.list')" [(ngModel)]="report.state.reason"></ListPicker>
       <Label horizontalAlignment="left" [text]="t.get('report.state.comment')" textWrap="true"></Label>
       <TextView text="" editable="true" [(ngModel)]="report.state.comment"></TextView>
@@ -44,7 +44,7 @@
         <Label horizontalAlignment="right" [text]="report.progress.delta" textWrap="true" width="50%"></Label>
       </StackLayout>
       <Progress [value]="report.progress.delta"></Progress>
-      <Label horizontalAlignment="left" [text]="t.get('report.progress.reason')" textWrap="true"></Label>
+      <Label class="margin-top" horizontalAlignment="left" [text]="t.get('report.progress.reason')" textWrap="true"></Label>
       <ListPicker [items]="t.get('report.progress.list')" [(ngModel)]="report.progress.reason"></ListPicker>
     </evz-section>
 
@@ -95,13 +95,13 @@
     </evz-section>
 
     <evz-section [title]="t.get('report.section.photos')" [collapse]="false">
-      <StackLayout orientation="horizontal">
-        <Image #photo class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="80"></Image>
+      <StackLayout orientation="horizontal" *ngFor="let item of report.photos">
+        <Image #photo class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
         <StackLayout class="input-box">
-          <TextField [hint]="t.get('report.photo.title')" text=""></TextField>
-          <TextField [hint]="t.get('report.photo.comment')" text=""></TextField>
+          <TextField [hint]="t.get('report.photo.title')" [text]="item.title"></TextField>
+          <TextField [hint]="t.get('report.photo.comment')" [text]="item.comment"></TextField>
         </StackLayout>
-        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onCameraTest()"></Button>
+        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onCameraTest(item)"></Button>
       </StackLayout>
     </evz-section>
 

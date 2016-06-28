@@ -1,82 +1,36 @@
-import {Injectable} from '@angular/core';
-import {Tender} from './tender';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http'
 
-const TENDERS : Tender[] = [
-  {
-    id: 1,
-    program: 'FREC 2016 Obras Individuales',
-    code: '1/2016/1',
-    cui: '4634585679780',
-    establishment: 'Escuela Secundaria No32 Mary O Graham',
-    type: 'Rehabilitacion general',
-    lastReport: '25 Abril de 2016',
-    title: 'Inet 47/15'
-  },
-  {
-    id: 2,
-    program: 'FREC 2016 Obras Individuales',
-    code: '1/2016/1',
-    cui: '4634585679780',
-    establishment: 'Escuela Secundaria No32 Mary O Graham',
-    type: 'Rehabilitacion general',
-    lastReport: '25 Abril de 2016',
-    title: 'Inet 47/15'
-  },
-  {
-    id: 3,
-    program: 'FREC 2016 Obras Individuales',
-    code: '1/2016/1',
-    cui: '4634585679780',
-    establishment: 'Escuela Secundaria No32 Mary O Graham',
-    type: 'Rehabilitacion general',
-    lastReport: '25 Abril de 2016',
-    title: 'Inet 47/15'
-  },
-  {
-    id: 4,
-    program: 'FREC 2016 Obras Individuales',
-    code: '1/2016/1',
-    cui: '4634585679780',
-    establishment: 'Escuela Secundaria No32 Mary O Graham',
-    type: 'Rehabilitacion general',
-    lastReport: '25 Abril de 2016',
-    title: 'Inet 47/15'
-  },
-  {
-    id: 5,
-    program: 'FREC 2016 Obras Individuales',
-    code: '1/2016/1',
-    cui: '4634585679780',
-    establishment: 'Escuela Secundaria No32 Mary O Graham',
-    type: 'Rehabilitacion general',
-    lastReport: '25 Abril de 2016',
-    title: 'Inet 47/15'
-  },
-  {
-    id: 6,
-    program: 'FREC 2016 Obras Individuales',
-    code: '1/2016/1',
-    cui: '4634585679780',
-    establishment: 'Escuela Secundaria No32 Mary O Graham',
-    type: 'Rehabilitacion general',
-    lastReport: '25 Abril de 2016',
-    title: 'Inet 47/15'
-  }
-];
+import { Tender } from './tender';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TenderService {
-  constructor() { }
+  constructor(private http: Http) { }
 
   fetch() : Observable<Tender[]> {
-    return Observable.create(observer => {
-      observer.next(TENDERS);
-      observer.complete();
-    });
+    console.log('Fetching tenders...');
+    return this.http.get('./tenders.json')
+      .map((res: Response) => {
+        console.log('123123');
+        return res.json();
+      })
+      .catch(this.handleError);
   }
 
   fetchOne(id: string) : Observable<Tender> {
-    return Observable.of(TENDERS.filter((t) => t.id === parseInt(id, 10)).pop());
+    return this.http.get('./tenders.json')
+      .map((res: Response) => {
+        let tenders = res.json();
+        return tenders.filter((t) => t.id === parseInt(id, 10)).pop();
+      })
+      .catch(this.handleError);
+  }
+
+  handleError(error: any) {
+    let errMsg = (error.message) ? error.message :
+    error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    console.error(errMsg);
+    return Observable.throw(errMsg);
   }
 }

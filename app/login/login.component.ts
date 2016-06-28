@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 import { Color } from 'color';
 import { Page } from 'ui/page';
@@ -16,18 +16,13 @@ import { Translations } from '../translations';
   styleUrls: ['login/login.css'],
 })
 export class LoginComponent implements OnInit {
-  private user: User;
   private t: Object;
+
+  @Input() user: User;
   @ViewChild('container') container: ElementRef;
-  @ViewChild('email') email: ElementRef;
-  @ViewChild('username') password: ElementRef;
-
   constructor(private _router: Router, private _userService: UserService, private page: Page) {
-    this.user = new User();
-    this.user.email = 'user@evz.com.ar';
-    this.user.username = 'password';
-
     this.t = new Translations();
+    this.user = new User();
   }
 
   ngOnInit() {
@@ -35,7 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    this.login();
+    if (this.user.isValid()) {
+      this.login();
+    }
   }
 
   login() {

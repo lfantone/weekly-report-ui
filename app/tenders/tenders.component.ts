@@ -25,4 +25,12 @@ export class TendersComponent implements OnInit {
   ngOnInit() {
     this.tenders = this.tenderService.fetch();
   }
+
+  refreshList(args: any) {
+    let pullRefresh = args.object;
+    // ONLY USING A TIMEOUT TO SIMULATE/SHOW OFF THE REFRESHING
+    setTimeout(function () {
+      pullRefresh.refreshing = false;
+    }, 1000);
+  }
 }

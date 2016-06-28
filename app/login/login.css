@@ -19,7 +19,7 @@ StackLayout {
 
 .copyright {
   color: #878787;
-  margin-top: 40;
+  margin-top: 10;
   font-size: 8;
   font-style: italic;
 }
@@ -33,7 +33,7 @@ StackLayout {
   color: black;
   font-size: 14;
   font-style: italic;
-  margin-top: 50;
+  margin-top: 25;
   padding: 5 30;
   text-transform: uppercase;
 }

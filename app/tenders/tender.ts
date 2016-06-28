@@ -6,5 +6,6 @@ export interface Tender {
   establishment: string,
   type: string,
   lastReport: string,
-  title: string
+  title: string,
+  state: string
 }

@@ -1,12 +1,13 @@
 <ActionBar title=""></ActionBar>
-<StackLayout #container class="body">
-  <Image class="logo" src="res://logo" horizontalAlignment="center" height="200" width="100%"></Image>
+<ScrollView>
+  <StackLayout #container class="body">
+    <Image class="logo" src="res://logo" horizontalAlignment="center" height="200" width="100%"></Image>
 
-  <TextField #user [hint]="t.get('login.hints.user')" keyboardType="email" [(ngModel)]="user.username"
-    autocorrect="false" autocapitalizationType="none"></TextField>
-  <TextField #password [hint]="t.get('login.hints.password')" secure="true" [(ngModel)]="user.password"></TextField>
+    <TextField [hint]="t.get('login.hints.user')" keyboardType="email" [(ngModel)]="user.email" autocorrect="false" autocapitalizationType="none"></TextField>
+    <TextField [hint]="t.get('login.hints.password')" secure="true" [(ngModel)]="user.password"></TextField>
 
-  <Button [text]="t.get('login.submit')" class="login-button" (tap)="submit()" color="white"></Button>
-  <Label [text]="t.get('login.forgot')" class="forgot-password"></Label>
-  <Label [text]="t.get('login.copyright')" class="copyright"></Label>
-</StackLayout>
+    <Button [text]="t.get('login.submit')" class="login-button" (tap)="submit()" color="white"></Button>
+    <Label [text]="t.get('login.forgot')" class="forgot-password"></Label>
+    <Label [text]="t.get('login.copyright')" class="copyright"></Label>
+  </StackLayout>
+</ScrollView>

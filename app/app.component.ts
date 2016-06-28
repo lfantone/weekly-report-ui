@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {RouteConfig, Router} from '@angular/router-deprecated';
-import {NS_ROUTER_DIRECTIVES, NS_ROUTER_PROVIDERS} from 'nativescript-angular/router';
-import {LoginComponent} from './login/login.component';
-import {TendersComponent} from './tenders/tenders.component';
-import {ReportComponent} from './report/report.component';
+import { Component, OnInit } from '@angular/core';
+import { RouteConfig, Router } from '@angular/router-deprecated';
+import { NS_ROUTER_DIRECTIVES, NS_ROUTER_PROVIDERS } from 'nativescript-angular/router';
+// Add the RxJS Observable operators we need in this app.
+import './rxjs-operators';
+
+import { LoginComponent } from './login/login.component';
+import { TendersComponent } from './tenders/tenders.component';
+import { ReportComponent } from './report/report.component';
 
 @Component({
   selector: 'evz-app',
@@ -20,6 +23,6 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.router.navigate(['Login']);
+    this.router.navigate(['Tenders']);
   }
 }
