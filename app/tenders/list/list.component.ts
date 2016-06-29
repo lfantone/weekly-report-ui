@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
-import 'rxjs/add/operator/find';
 
 import { Tender } from '../tender';
 

@@ -2,7 +2,7 @@
 <PullToRefresh #refresh (refresh)="refreshList($event)">
   <ScrollView>
     <StackLayout class="body">
-      <evz-tender-list [tenders]="tenders | async"></evz-tender-list>
+      <evz-tender-list [tenders]="tenders"></evz-tender-list>
     </StackLayout>
   </ScrollView>
 </PullToRefresh>

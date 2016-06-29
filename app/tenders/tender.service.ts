@@ -10,26 +10,21 @@ export class TenderService {
 
   fetch() : Observable<Tender[]> {
     console.log('Fetching tenders...');
-    return this.http.get('./tenders.json')
-      .map((res: Response) => {
-        console.log('123123');
-        return res.json();
-      })
+    return this.http.get('http://192.168.1.104:3000/tenders')
+      .map((res: Response) => res.json().data)
       .catch(this.handleError);
   }
 
-  fetchOne(id: string) : Observable<Tender> {
-    return this.http.get('./tenders.json')
-      .map((res: Response) => {
-        let tenders = res.json();
-        return tenders.filter((t) => t.id === parseInt(id, 10)).pop();
-      })
+  fetchOne(id: number) : Observable<Tender> {
+    console.log(`Fetching tender with id: ${id}`);
+    return this.http.get(`http://192.168.1.104:3000/tender/${id}`)
+      .map((res: Response) => res.json())
       .catch(this.handleError);
   }
 
   handleError(error: any) {
     let errMsg = (error.message) ? error.message :
-    error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+      error.status ? `Error: ${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg);
     return Observable.throw(errMsg);
   }

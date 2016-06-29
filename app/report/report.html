@@ -1,13 +1,13 @@
-<ActionBar [title]="tender.value.title">
+<ActionBar [title]="tender.title">
   <NavigationButton android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
 </ActionBar>
 <ScrollView>
   <StackLayout class="body">
     <evz-information
-      [cui]="tender.value.cui"
-      [establishment]="tender.value.establishment"
-      [type]="tender.value.type"
-      [lastReport]="tender.value.lastReport">
+      [cui]="tender.cui"
+      [establishment]="tender.establishment"
+      [type]="tender.type"
+      [lastReport]="tender.lastReport">
     </evz-information>
 
     <evz-section [title]="t.get('report.section.visit')" [collapse]="false" className="visit-date">
@@ -17,7 +17,7 @@
     <evz-section [title]="t.get('report.section.state')" [collapse]="false">
       <StackLayout>
         <StackLayout orientation="horizontal">
-          <Button class="segmented-btn green-btn" horizontalAlignment="left" [class.active]="isSegmentedBtnActive.good" (tap)="onSegmentedButtonTap('good')" [text]="t.get('report.state.good')"></Button>
+          <Button class="segmented-btn green-btn" horizontalAlignment="left" [class.segmented-btn-active]="isSegmentedBtnActive.good" (tap)="onSegmentedButtonTap('good')" [text]="t.get('report.state.good')"></Button>
           <Button class="segmented-btn yellow-btn" horizontalAlignment="center" [class.segmented-btn-active]="isSegmentedBtnActive.regular" (tap)="onSegmentedButtonTap('regular')" [text]="t.get('report.state.regular')"></Button>
           <Button class="segmented-btn red-btn" horizontalAlignment="right" [class.segmented-btn-active]="isSegmentedBtnActive.bad" (tap)="onSegmentedButtonTap('bad')" [text]="t.get('report.state.bad')"></Button>
         </StackLayout>
@@ -38,7 +38,7 @@
         <Label class="progress-label" horizontalAlignment="left" [text]="t.get('report.progress.last')" textWrap="true" width="50%"></Label>
         <Label horizontalAlignment="right" [text]="report.progress.last" textWrap="true" width="50%"></Label>
       </StackLayout>
-      <Slider [minValue]="0" [maxValue]="100" [value]="report.progress.last" [(ngModel)]="report.progress.last"></Slider>
+      <Progress [value]="report.progress.last"></Progress>
       <StackLayout orientation="horizontal">
         <Label class="progress-label" horizontalAlignment="left" [text]="t.get('report.progress.delta')" textWrap="true" width="50%"></Label>
         <Label horizontalAlignment="right" [text]="report.progress.delta" textWrap="true" width="50%"></Label>
@@ -98,10 +98,10 @@
       <StackLayout orientation="horizontal" *ngFor="let item of report.photos">
         <Image #photo class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
         <StackLayout class="input-box">
-          <TextField [hint]="t.get('report.photo.title')" [text]="item.title"></TextField>
-          <TextField [hint]="t.get('report.photo.comment')" [text]="item.comment"></TextField>
+          <TextField [hint]="t.get('report.photo.title')" [text]="item.title" [(ngModel)]="report.photos[item.id].title"></TextField>
+          <TextField [hint]="t.get('report.photo.comment')" [text]="item.comment" [(ngModel)]="report.photos[item.id].comment"></TextField>
         </StackLayout>
-        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onCameraTest(item)"></Button>
+        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(item)"></Button>
       </StackLayout>
     </evz-section>
 
