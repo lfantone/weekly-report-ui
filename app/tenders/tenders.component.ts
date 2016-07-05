@@ -17,22 +17,20 @@ import { Translations } from '../translations';
 })
 export class TendersComponent implements OnInit {
   t: Object;
-  tenders: Tender[];
+  tenders: Observable<Tender[]>;
+  isLoading: boolean;
   constructor(private tenderService: TenderService) {
     this.t = new Translations();
   }
 
   ngOnInit() {
-    this.tenderService.fetch()
-      .subscribe(tenders => this.tenders = tenders);
+    this.isLoading = true;
+    this.tenders = this.tenderService.fetch(null, () => this.isLoading = false);
   }
 
   refreshList(args: any) {
     let pullRefresh = args.object;
-    this.tenderService.fetch()
-      .subscribe(tenders => {
-        this.tenders = tenders;
-        pullRefresh.refreshing = false;
-      });
+    this.tenders = this.tenderService
+      .fetch(pullRefresh);
   }
 }

@@ -1,13 +1,11 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
-import { Color } from 'color';
 import { Page } from 'ui/page';
-import { TextField } from 'ui/text-field';
-import { View } from 'ui/core/view';
 
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
 import { Translations } from '../translations';
+import appSettings = require('application-settings');
 
 @Component({
   selector: 'evz-login',
@@ -19,7 +17,6 @@ export class LoginComponent implements OnInit {
   private t: Object;
 
   @Input() user: User;
-  @ViewChild('container') container: ElementRef;
   constructor(private _router: Router, private _userService: UserService, private page: Page) {
     this.t = new Translations();
     this.user = new User();
@@ -31,23 +28,25 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (this.user.isValid()) {
-      this.login();
+      this.login(this.user);
     }
   }
 
-  login() {
-    this._userService.login(this.user)
-      .subscribe(
-        () => this._router.navigate(['Tenders']),
-        (error) => alert('Unfortunately we could not find your account.')
-      );
-  }
-
-  toggleDisplay() {
-    let container = <View>this.container.nativeElement;
-    container.animate({
-      backgroundColor: new Color('white'),
-      duration: 200
-    });
+  login(user) {
+    this._userService.login(user)
+    .subscribe(
+      (response) => {
+        if (response.success) {
+          appSettings.setString('user', JSON.stringify(this.user));
+          appSettings.setString('TOKEN', response.token);
+          this._router.navigate(['Tenders']);
+        } else {
+          alert('Usuario y/o Password inexistentes.');
+        }
+      },
+      (error) => {
+        alert('Usuario y/o Password inexistentes.');
+      }
+    );
   }
 }

@@ -1,11 +1,17 @@
 export interface Tender {
   id: number,
-  program: string,
   code: string,
-  cui: string,
+  cue: string,
   establishment: string,
   type: string,
   lastReport: string,
   title: string,
-  state: string
+  state: {
+    id: number,
+    value: string
+  },
+  progress: {
+    last: number,
+    delta: number
+  }
 }

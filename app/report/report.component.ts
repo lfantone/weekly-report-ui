@@ -4,16 +4,16 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
 import { Page } from 'ui/page';
 import cameraModule = require('camera');
+import appSettings = require('application-settings');
 
 import { InformationComponent } from './information/information.component';
 import { ReportService } from './report.service';
 import { SectionComponent } from './section/section.component';
 import { Translations } from '../translations';
 import { Report } from './report.model';
-// import { Tender } from '../tenders/tender';
 import { TenderService } from '../tenders/tender.service';
 
-const _uniq = require('lodash.uniq');
+const options = { width: 1024, height: 768, keepAspectRatio: true }
 
 @Component({
   directives: [InformationComponent, SectionComponent],
@@ -23,103 +23,128 @@ const _uniq = require('lodash.uniq');
   providers: [ReportService, TenderService]
 })
 export class ReportComponent implements OnInit {
-  @ViewChild('photo') photo: ElementRef;
+  @ViewChild('photo0') photo0: ElementRef;
+  @ViewChild('photo1') photo1: ElementRef;
+  @ViewChild('photo2') photo2: ElementRef;
+  @ViewChild('photo3') photo3: ElementRef;
+  @ViewChild('photo4') photo4: ElementRef;
+  @ViewChild('photo5') photo5: ElementRef;
+  @ViewChild('photo6') photo6: ElementRef;
+  @ViewChild('photo7') photo7: ElementRef;
+  @ViewChild('photo8') photo8: ElementRef;
+  @ViewChild('photo9') photo9: ElementRef;
+  @ViewChild('photo10') photo10: ElementRef;
+  @ViewChild('photo11') photo11: ElementRef;
 
   report: Report;
   t: Object;
   tender: any;
-
-  isDaySelected: Object;
-  isRainSelected: Object;
   isSegmentedBtnActive: Object;
+  isLoading: boolean;
+  collapse: Object;
   constructor(private location: Location, private params: RouteParams, private reportService: ReportService, private tenderService: TenderService) {
     let id = parseInt(params.get('id'), 10);
-    this.report = new Report(id, 43, 56, new Date().toDateString(), 6);
-    this.tender = {};
-    this.isDaySelected = {
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false,
+    this.report = new Report(id, new Date().toDateString(), 12, 3);
+    this.tender = {
+      progress: {}
     };
-
-    this.isRainSelected = {
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false,
-    };
-
+    this.isLoading = false;
     this.isSegmentedBtnActive = {
-      good: false,
-      regular: true,
-      bad: false
+      90000: false,
+      90001: true,
+      90002: false
     }
+    this.collapse = {
+      visit: false,
+      state: false,
+      progress: false,
+      forecast: false,
+      doc: false,
+      photos: false
+    };
     this.t = new Translations();
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.tenderService.fetchOne(this.report.id)
-      .subscribe((tender) => this.tender = tender);
+      .subscribe((tender) => {
+        if (appSettings.hasKey(`report-${this.report.id}`)) {
+          this.report.setData(JSON.parse(appSettings.getString(`report-${this.report.id}`)));
+          this.onSegmentedButtonTap(this.report.state.state);
+        }
+        this.isLoading = false;
+        this.tender = tender;
+      });
   }
 
   public goBack() {
     this.location.back();
   }
 
-  public onStateButtonTab(state) {
-    this.report.state.state = state;
+  public onDayButtonTap(day: string) {
+    this.report.setInspectorDay(day);
   }
 
-  public onDayButtonTap(day) {
-    this.isDaySelected[day] = !this.isDaySelected[day];
-    this.report.forecast.inspector.push(day);
-    this.report.forecast.inspector = _uniq(this.report.forecast.inspector);
-  }
-
-  public onRainButtonTap(day) {
-    this.isRainSelected[day] = !this.isRainSelected[day];
-    this.report.forecast.rain.push(day);
-    this.report.forecast.rain = _uniq(this.report.forecast.rain);
+  public onRainButtonTap(day: string) {
+    this.report.setRainDay(day);
   }
 
   public onStartCamera(item) {
-    let image = this.photo.nativeElement;
-    cameraModule.takePicture({width: 1024, height: 768, keepAspectRatio: true}).then(picture => {
+    let image = this[`photo${item.id}`].nativeElement;
+    cameraModule.takePicture({}).then(picture => {
       image.imageSource = picture;
-      item.path = picture;
+      item.path = picture.toBase64String('jpeg');
     });
   }
 
   public onSaveButtonTap() {
-    console.log('save !');
-    console.log(JSON.stringify(this.report));
+    appSettings.setString(`report-${this.report.id}`, JSON.stringify(this.report));
+    alert('El reporte fue guardado');
+    this.goBack();
   }
 
   /**
    * onSendButtonTap
    */
   public onSendButtonTap() {
-    console.log('send !');
-    console.log(this.report);
+    this.isLoading = true;
+    this.reportService.send(this.report)
+      .subscribe((response) => {
+        this.isLoading = false;
+        alert('El reporte fue creado con éxito.');
+        this.goBack();
+      }, (error) => {
+        this.isLoading = false;
+        alert('Hubo un error al enviar el reporte.');
+      });
   }
 
   /**
    * onSegmentedButtonTap
    */
-  public onSegmentedButtonTap(name) {
+  public onSegmentedButtonTap(id: number) {
     for (let key in this.isSegmentedBtnActive) {
       if (this.isSegmentedBtnActive.hasOwnProperty(key)) {
         this.isSegmentedBtnActive[key] = false;
       }
     }
-    this.isSegmentedBtnActive[name] = !this.isSegmentedBtnActive[name];
-    this.report.state.state = name;
+    this.isSegmentedBtnActive[id] = !this.isSegmentedBtnActive[id];
+    this.report.setState(id);
+  }
+
+  public closeSections(name: string) {
+    console.log(JSON.stringify(this.collapse));
+    console.log(JSON.stringify(name));
+    for (let key in this.collapse) {
+      if (this.collapse.hasOwnProperty(key)) {
+        if (key === name) {
+          this.collapse[key] = !this.collapse[key];
+        } else {
+          this.collapse[key] = false;
+        }
+      }
+    }
+    console.log(JSON.stringify(this.collapse));
   }
 }

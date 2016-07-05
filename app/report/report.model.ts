@@ -1,3 +1,5 @@
+import { Report as IReport } from './report';
+
 export class Report {
   id: number;
   date: {
@@ -6,32 +8,48 @@ export class Report {
     year: number
   };
   state: {
-    state: string,
-    reason: string,
+    state: number,
+    reason: number,
     comment: string
   };
   progress: {
     last: number,
     delta: number,
-    reason: string
+    reason: number
   };
   evaluation: {
-    concept: string,
-    quality: string
+    concept: number,
+    quality: number
   };
   forecast: {
     lastVisit: string,
-    inspector: string[],
-    rain: string[],
-    audit: any[]
+    inspector: {
+      monday: boolean,
+      tuesday: boolean,
+      wednesday: boolean,
+      thursday: boolean,
+      friday: boolean,
+      saturday: boolean,
+      sunday: boolean,
+    },
+    rain: {
+      monday: boolean,
+      tuesday: boolean,
+      wednesday: boolean,
+      thursday: boolean,
+      friday: boolean,
+      saturday: boolean,
+      sunday: boolean,
+    }
   };
+  audits: any[];
   doc: {
     quantity: number,
-    book: string
+    book: number
   };
   photos: any[];
 
-  constructor(id: number, lastProgress: number, deltaProgress: number, lastVisit: string, photoLength: number = 1) {
+  constructor(id: number, lastVisit: string, photoLength: number = 6, auditsLength: number = 3) {
     let date = new Date();
     this.id = id;
     this.date = {
@@ -40,32 +58,68 @@ export class Report {
       year: date.getFullYear()
     };
     this.progress = {
-      last: lastProgress,
-      delta: deltaProgress,
-      reason: ''
+      last: 0,
+      delta: 0,
+      reason: 0
     };
     this.state = {
-      state: '',
-      reason: '',
+      state: 90001,
+      reason: 0,
       comment: ''
     };
     this.evaluation = {
-      concept: '',
-      quality: ''
+      concept: 0,
+      quality: 0
     };
     this.forecast = {
       lastVisit,
-      inspector: [],
-      rain: [],
-      audit: []
+      inspector: {
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
+      },
+      rain: {
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
+      }
     };
     this.doc = {
       quantity: 0,
-      book: ''
+      book: 0
     };
+
+    this.createAuditArray(auditsLength);
     this.createPhotoArray(photoLength);
   }
-  createPhotoArray(length) {
+  setData(report: IReport) {
+    this.audits = report.audits;
+    this.date = report.date;
+    this.doc = report.doc;
+    this.evaluation = report.evaluation;
+    this.forecast = report.forecast;
+    this.photos = report.photos;
+    this.progress = report.progress;
+    this.state = report.state;
+  }
+  setRainDay(day: string) {
+    this.forecast.rain[day] = !this.forecast.rain[day];
+  }
+  setInspectorDay(day: string) {
+    this.forecast.inspector[day] = !this.forecast.inspector[day];
+  }
+  setState(value: number) {
+    this.state.state = value;
+  }
+  private createPhotoArray(length) {
     this.photos = [];
     for (let i = 0; i < length; i++) {
       this.photos.push({
@@ -73,6 +127,22 @@ export class Report {
         title: '',
         comment: '',
         path: ''
+      });
+    }
+  }
+  private createAuditArray(length) {
+    let date = new Date();
+    this.audits = [];
+
+    for (var i = 0; i < length; i++) {
+      this.audits.push({
+        id: i,
+        value: 0,
+        date: {
+          day: date.getDate(),
+          month: date.getMonth(),
+          year: date.getFullYear()
+        }
       });
     }
   }

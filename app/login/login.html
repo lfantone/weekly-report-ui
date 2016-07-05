@@ -3,7 +3,7 @@
   <StackLayout #container class="body">
     <Image class="logo" src="res://logo" horizontalAlignment="center" height="200" width="100%"></Image>
 
-    <TextField [hint]="t.get('login.hints.user')" keyboardType="email" [(ngModel)]="user.email" autocorrect="false" autocapitalizationType="none"></TextField>
+    <TextField [hint]="t.get('login.hints.user')" [(ngModel)]="user.username" autocorrect="false" autocapitalizationType="none"></TextField>
     <TextField [hint]="t.get('login.hints.password')" secure="true" [(ngModel)]="user.password"></TextField>
 
     <Button [text]="t.get('login.submit')" class="login-button" (tap)="submit()" color="white"></Button>

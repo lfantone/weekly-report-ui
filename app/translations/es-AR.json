@@ -60,8 +60,9 @@
         "sunday": "D"
       },
       "rain": "Lluvia",
-      "audits": "Auditorías",
-      "list": ["Estructuras", "Instalaciones", "Supervisor", "Coord. Programa", "Nación", "UCO", "AUTORIDADES", "SIN VISITAS EXTERNAS"]
+      "audits": "Auditorías/Visitas",
+      "audit": "Auditoría",
+      "list": ["Estructuras", "Instalaciones", "Supervisor", "Coord. Programa", "Nación", "UCO", "Autoridades"]
     },
     "doc": {
       "quantity": "Cantidad de Órdenes de Servicio",

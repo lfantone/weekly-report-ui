@@ -1,33 +1,49 @@
 export interface Report {
-  id: number,
+  id: number;
   date: {
     day: number,
     month: number,
     year: number
-  },
+  };
   state: {
-    state: string,
-    reason: string,
+    state: number,
+    reason: number,
     comment: string
-  },
+  };
   progress: {
     last: number,
     delta: number,
-    reason: string
-  },
+    reason: number
+  };
   evaluation: {
-    concept: string,
-    quality: string
-  },
+    concept: number,
+    quality: number
+  };
   forecast: {
     lastVisit: string,
-    inspector: string[],
-    rain: string[],
-    audit: any[]
+    inspector: {
+      monday: boolean,
+      tuesday: boolean,
+      wednesday: boolean,
+      thursday: boolean,
+      friday: boolean,
+      saturday: boolean,
+      sunday: boolean,
+    },
+    rain: {
+      monday: boolean,
+      tuesday: boolean,
+      wednesday: boolean,
+      thursday: boolean,
+      friday: boolean,
+      saturday: boolean,
+      sunday: boolean,
+    }
   },
+  audits: any[];
   doc: {
     quantity: number,
-    book: string
-  },
+    book: number
+  };
   photos: any[];
 }

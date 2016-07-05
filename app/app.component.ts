@@ -7,6 +7,7 @@ import './rxjs-operators';
 import { LoginComponent } from './login/login.component';
 import { TendersComponent } from './tenders/tenders.component';
 import { ReportComponent } from './report/report.component';
+import appSettings = require('application-settings');
 
 @Component({
   selector: 'evz-app',
@@ -20,9 +21,15 @@ import { ReportComponent } from './report/report.component';
   { path: '/tenders/:id', component: ReportComponent, name: 'Report' }
 ])
 export class AppComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    appSettings.setString('URL', 'http://52.32.15.133:3000/geobra');
+  }
 
   ngOnInit() {
-    this.router.navigate(['Tenders']);
+    if (appSettings.hasKey('user') && appSettings.hasKey('TOKEN')) {
+      this.router.navigate(['Tenders']);
+    } else {
+      this.router.navigate(['Login']);
+    }
   }
 }
