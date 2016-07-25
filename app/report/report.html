@@ -13,105 +13,19 @@
       [lastReport]="tender.lastReport">
     </evz-information>
 
-    <evz-section [title]="t.get('report.section.visit')" [collapse]="collapse.visit" className="visit-date" [closeAll]="closeAll">
-      <DatePicker [day]="report.date.day" [month]="report.date.month" [year]="report.date.year"></DatePicker>
-    </evz-section>
+    <evz-section [title]="t.get('report.section.visit')" name="visit" [id]="report.id"></evz-section>
 
-    <evz-section [title]="t.get('report.section.state')" [collapse]="collapse.state">
-      <StackLayout>
-        <StackLayout orientation="horizontal">
-          <Button class="segmented-btn green-btn" horizontalAlignment="left" [class.segmented-btn-active]="isSegmentedBtnActive[90000]" (tap)="onSegmentedButtonTap(90000)" [text]="t.get('report.state.good')"></Button>
-          <Button class="segmented-btn yellow-btn" horizontalAlignment="center" [class.segmented-btn-active]="isSegmentedBtnActive[90001]" (tap)="onSegmentedButtonTap(90001)" [text]="t.get('report.state.regular')"></Button>
-          <Button class="segmented-btn red-btn" horizontalAlignment="right" [class.segmented-btn-active]="isSegmentedBtnActive[90002]" (tap)="onSegmentedButtonTap(90002)" [text]="t.get('report.state.bad')"></Button>
-        </StackLayout>
-        <StackLayout orientation="horizontal">
-          <Label class="border-bottom" [class.border-bottom-active]="isSegmentedBtnActive[90000]" horizontalAlignment="left"></Label>
-          <Label class="border-bottom" [class.border-bottom-active]="isSegmentedBtnActive[90001]" horizontalAlignment="center"></Label>
-          <Label class="border-bottom" [class.border-bottom-active]="isSegmentedBtnActive[90002]" horizontalAlignment="right"></Label>
-        </StackLayout>
-      </StackLayout>
-      <Label class="margin-top" horizontalAlignment="left" [text]="t.get('report.state.reason')" textWrap="true"></Label>
-      <ListPicker [items]="t.get('report.state.list')" [(ngModel)]="report.state.reason"></ListPicker>
-      <Label horizontalAlignment="left" [text]="t.get('report.state.comment')" textWrap="true"></Label>
-      <TextView text="" editable="true" [(ngModel)]="report.state.comment"></TextView>
-    </evz-section>
+    <evz-section [title]="t.get('report.section.state')" name="state" [id]="report.id"></evz-section>
 
-    <evz-section [title]="t.get('report.section.progress')" [collapse]="collapse.progress">
-      <StackLayout orientation="horizontal">
-        <Label class="progress-label" horizontalAlignment="left" [text]="t.get('report.progress.last')" textWrap="true" width="50%"></Label>
-        <Label horizontalAlignment="right" [text]="tender.progress.last" textWrap="true" width="50%"></Label>
-      </StackLayout>
-      <Progress [value]="tender.progress.last"></Progress>
-      <StackLayout orientation="horizontal">
-        <Label class="progress-label" horizontalAlignment="left" [text]="t.get('report.progress.delta')" textWrap="true" width="50%"></Label>
-        <Label horizontalAlignment="right" [text]="tender.progress.delta" textWrap="true" width="50%"></Label>
-      </StackLayout>
-      <Progress [value]="tender.progress.delta"></Progress>
-      <Label class="margin-top" horizontalAlignment="left" [text]="t.get('report.progress.reason')" textWrap="true"></Label>
-      <ListPicker [items]="t.get('report.progress.list')" [(ngModel)]="report.progress.reason"></ListPicker>
-    </evz-section>
+    <evz-section [title]="t.get('report.section.progress')" name="progress" [id]="report.id"></evz-section>
 
-    <evz-section [title]="t.get('report.section.evaluation')" [collapse]="collapse.evaluation">
-      <Label horizontalAlignment="left" [text]="t.get('report.evaluation.concept')" textWrap="true"></Label>
-      <ListPicker [items]="t.get('report.evaluation.list')" [(ngModel)]="report.evaluation.concept"></ListPicker>
-      <Label horizontalAlignment="left" [text]="t.get('report.evaluation.quality')" textWrap="true"></Label>
-      <ListPicker [items]="t.get('report.evaluation.list')" [(ngModel)]="report.evaluation.quality"></ListPicker>
-    </evz-section>
+    <evz-section [title]="t.get('report.section.evaluation')" name="evaluation" [id]="report.id"></evz-section>
 
-    <evz-section [title]="t.get('report.section.forecast')" [collapse]="collapse.forecast">
-      <StackLayout>
-        <Label class="date-title" horizontalAlignment="left" [text]="t.get('report.forecast.visit')" textWrap="true"></Label>
-        <Label class="date" horizontalAlignment="left" [text]="tender.lastReport" textWrap="true"></Label>
-        <Label class="dark-background" horizontalAlignment="left" [text]="t.get('report.forecast.inspector')" textWrap="true" width="100%"></Label>
-        <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.days')" textWrap="true" width="100%"></Label>
-        <StackLayout orientation="horizontal">
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.monday" [text]="t.get('report.forecast.day.monday')" (tap)="onDayButtonTap('monday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.tuesday" [text]="t.get('report.forecast.day.tuesday')" (tap)="onDayButtonTap('tuesday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.wednesday" [text]="t.get('report.forecast.day.wednesday')" (tap)="onDayButtonTap('wednesday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.thursday" [text]="t.get('report.forecast.day.thursday')" (tap)="onDayButtonTap('thursday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.friday" [text]="t.get('report.forecast.day.friday')" (tap)="onDayButtonTap('friday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.saturday" [text]="t.get('report.forecast.day.saturday')" (tap)="onDayButtonTap('saturday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.sunday" [text]="t.get('report.forecast.day.sunday')" (tap)="onDayButtonTap('sunday')"></Button>
-        </StackLayout>
-        <Label class="dark-background" horizontalAlignment="left" [text]="t.get('report.forecast.rain')" textWrap="true" width="100%"></Label>
-        <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.days')" textWrap="true" width="100%"></Label>
-        <StackLayout orientation="horizontal">
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.monday" [text]="t.get('report.forecast.day.monday')" (tap)="onRainButtonTap('monday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.tuesday" [text]="t.get('report.forecast.day.tuesday')" (tap)="onRainButtonTap('tuesday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.wednesday" [text]="t.get('report.forecast.day.wednesday')" (tap)="onRainButtonTap('wednesday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.thursday" [text]="t.get('report.forecast.day.thursday')" (tap)="onRainButtonTap('thursday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.friday" [text]="t.get('report.forecast.day.friday')" (tap)="onRainButtonTap('friday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.saturday" [text]="t.get('report.forecast.day.saturday')" (tap)="onRainButtonTap('saturday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.sunday" [text]="t.get('report.forecast.day.sunday')" (tap)="onRainButtonTap('sunday')"></Button>
-        </StackLayout>
-      </StackLayout>
-      <Label class="dark-background" horizontalAlignment="left" [text]="t.get('report.forecast.audits')" textWrap="true" width="100%"></Label>
-      <StackLayout orientation="vertical" *ngFor="let item of report.audits">
-        <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.audit') + ' ' + (item.id + 1)" textWrap="true" width="100%"></Label>
-        <ListPicker [items]="t.get('report.forecast.list')" [(ngModel)]="report.audits[item.id].value"></ListPicker>
-        <DatePicker [day]="item.date.day" [month]="item.date.month" [year]="item.date.year"></DatePicker>
-      </StackLayout>
-    </evz-section>
+    <evz-section [title]="t.get('report.section.forecast')" name="forecast" [id]="report.id"></evz-section>
 
-    <evz-section [title]="t.get('report.section.doc')" [collapse]="collapse.doc">
-      <StackLayout class="doc-quantity-box" orientation="horizontal">
-        <Label class="doc-quantity-title" horizontalAlignment="left" [text]="t.get('report.doc.quantity')" textWrap="true"></Label>
-        <TextField [hint]="t.get('report.doc.quantity')" horizontalAlignment="right" [text]="report.doc.quantity" keyboardType="phone" [(ngModel)]="report.doc.quantity"></TextField>
-      </StackLayout>
-      <Label horizontalAlignment="left" [text]="t.get('report.doc.book')" textWrap="true"></Label>
-      <ListPicker [items]="t.get('report.doc.list')" [(ngModel)]="report.doc.book"></ListPicker>
-    </evz-section>
+    <evz-section [title]="t.get('report.section.doc')" name="doc" [id]="report.id"></evz-section>
 
-    <evz-section [title]="t.get('report.section.photos')" [collapse]="true">
-      <StackLayout orientation="horizontal" *ngFor="let item of report.photos">
-        <Image #photo+item.id class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
-        <StackLayout class="input-box">
-          <TextField [hint]="t.get('report.photo.title')" [text]="item.title" [(ngModel)]="report.photos[item.id].title"></TextField>
-          <TextField [hint]="t.get('report.photo.comment')" [text]="item.comment" [(ngModel)]="report.photos[item.id].comment"></TextField>
-        </StackLayout>
-        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[item.id])"></Button>
-      </StackLayout>
-    </evz-section>
+    <evz-section [title]="t.get('report.section.photos')" name="photos" [id]="report.id"></evz-section>
 
     <Button class="save-btn material-icon" [text]="'&#xf297; ' + t.get('report.save')" (tap)="onSaveButtonTap()"></Button>
     <Button class="send-btn material-icon" [text]="'&#xf194; ' + t.get('report.send')" (tap)="onSendButtonTap()"></Button>

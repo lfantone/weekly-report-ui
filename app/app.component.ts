@@ -3,11 +3,12 @@ import { RouteConfig, Router } from '@angular/router-deprecated';
 import { NS_ROUTER_DIRECTIVES, NS_ROUTER_PROVIDERS } from 'nativescript-angular/router';
 // Add the RxJS Observable operators we need in this app.
 import './rxjs-operators';
+import appSettings = require('application-settings');
 
 import { LoginComponent } from './login/login.component';
 import { TendersComponent } from './tenders/tenders.component';
 import { ReportComponent } from './report/report.component';
-import appSettings = require('application-settings');
+import { FormComponent } from './report/form/form.component';
 
 @Component({
   selector: 'evz-app',
@@ -18,7 +19,8 @@ import appSettings = require('application-settings');
 @RouteConfig([
   { path: '/login', component: LoginComponent, name: 'Login' },
   { path: '/tenders', component: TendersComponent, name: 'Tenders' },
-  { path: '/tenders/:id', component: ReportComponent, name: 'Report' }
+  { path: '/tenders/:id', component: ReportComponent, name: 'Report' },
+  { path: '/form/:title/:name/:id', component: FormComponent, name: 'Form' }
 ])
 export class AppComponent implements OnInit {
   constructor(private router: Router) {

@@ -1,0 +1,158 @@
+.body {
+  background-color: #F9F9F9;
+}
+
+.border {
+  border-color: #59bcaa;
+  border-width: 2;
+  height: 4;
+  width: 2;
+}
+
+.border-bottom {
+  background-color: #BABABA;
+  height: 4;
+  width: 33%;
+}
+
+.border-bottom-active {
+  background-color: #FDCA2E;
+}
+
+.blue {
+  background-color: #4e6f97;
+}
+
+.btn-box {
+  padding: 5;
+}
+
+.dark-background {
+  color: white;
+  background-color: #878787;
+  text-transform: uppercase;
+  padding: 10;
+}
+
+.date {
+  margin-bottom: 20;
+  font-size: 14;
+  font-weight: 700;
+}
+
+.date-btn {
+  font-size: 20;
+  font-weight: 700;
+  height: 50;
+  width: 50;
+  background-color: #BABABA;
+}
+
+.date-title {
+  font-size: 10;
+  text-transform: uppercase;
+}
+
+.day-btn-active {
+  animation-name: changeColor;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.doc-quantity-box {
+  margin-bottom: 20;
+}
+
+.doc-quantity-title {
+  margin-right: 80;
+  padding-top: 15;
+}
+
+.edit-btn {
+  background-color: #f0f0f1;
+  color: #878787;
+  font-size: 15;
+  margin-left: 10;
+  padding: 10 15;
+  height: 60;
+  width: 60;
+}
+
+.green-btn {
+  background-color: #6DBB4C;
+}
+
+.light-background {
+  background-color: #e5e5e0;
+  color: #878787;
+  font-style: italic;
+  padding: 10;
+}
+
+.input-box {
+  margin: 0 10;
+  padding: 10;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.margin-top {
+  margin-top: 25;
+}
+
+.material-icon {
+  font-family: 'Material-Design-Iconic-Font';
+  margin-top: 3;
+  padding-right: 18;
+}
+
+.progress Slider {
+  margin: 20 0;
+}
+
+.progress-label {
+  margin-right: 50;
+}
+
+.red-btn {
+  background-color: #D65E65;
+}
+
+.save-btn, .send-btn {
+  background-color: #313B44;
+  color: white;
+  font-size: 16;
+  margin: 10 0 0 0 ;
+  padding: 10 40;
+  width: 100%;
+}
+
+.segmented-btn {
+  color: #BABABA;
+  font-size: 12;
+  margin: 0;
+  width: 33%;
+}
+
+.segmented-btn-active, .active {
+  color: black;
+}
+
+.yellow-btn {
+  background-color: #E3DA6A;
+}
+
+@keyframes changeColor {
+  from {
+    background-color: #BABABA;
+  }
+  to {
+    background-color: #FDCA2E;
+  }
+}

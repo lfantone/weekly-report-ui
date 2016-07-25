@@ -1,6 +1,5 @@
-import { Component, ChangeDetectionStrategy, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Page } from 'ui/page';
-import { View } from 'ui/core/view';
+import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 
 @Component({
   selector: 'evz-section',
@@ -10,18 +9,17 @@ import { View } from 'ui/core/view';
 })
 export class SectionComponent implements OnInit {
   @Input()
-  private collapse: Boolean;
-  @Input()
-  private className: String;
+  private name: String;
   @Input()
   private title: String;
-  @ViewChild('box') box: ElementRef;
+  @Input()
+  private id: Number;
 
-  constructor(private page: Page) { }
+  constructor(private _router: Router) { }
 
   ngOnInit() { }
 
-  public onItemTap(name) {
-    this.collapse = !this.collapse;
+  public onItemTap() {
+    this._router.navigate(['Form', { title: this.title, name: this.name, id: this.id }]);
   }
 }

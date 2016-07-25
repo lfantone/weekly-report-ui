@@ -55,6 +55,16 @@ export class ReportService {
       }
     }
 
+    if (report.photos.length < 6) {
+      for (var i = 6; i < 12; i++) {
+        r.photos.push({
+          id: i,
+          title: '',
+          comment: '',
+          path: ''
+        });
+      }
+    }
     return r;
   }
 }
