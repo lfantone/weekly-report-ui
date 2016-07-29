@@ -5,7 +5,8 @@ export class Report {
   date: {
     day: number,
     month: number,
-    year: number
+    year: number,
+    model: Date
   };
   state: {
     state: number,
@@ -55,7 +56,8 @@ export class Report {
     this.date = {
       day: date.getDate(),
       month: date.getMonth(),
-      year: date.getFullYear()
+      year: date.getFullYear(),
+      model: date
     };
     this.progress = {
       last: 0,
@@ -100,6 +102,33 @@ export class Report {
     this.createAuditArray(auditsLength);
     this.createPhotoArray(photoLength);
   }
+  setAudit(index: number, value: number) {
+    this.audits[index].value = value;
+  }
+  setAuditsDate(audits: any[]){
+    for (let i = 0; i < audits.length; i++) {
+      let audit = audits[i];
+      let date = audit.date.model;
+
+      if (typeof date === 'string') {
+        date = new Date(date);
+      }
+
+      this.audits[i] = {
+        id: audit.id,
+        value: audit.value,
+        date: {
+          day: date.getDate(),
+          month: date.getMonth() + 1,
+          year: date.getFullYear(),
+          model: date
+        }
+      }
+    }
+  }
+  setConcept(index: number) {
+    this.evaluation.concept = index;
+  }
   setData(report: IReport) {
     this.audits = report.audits;
     this.date = report.date;
@@ -110,20 +139,44 @@ export class Report {
     this.progress = report.progress;
     this.state = report.state;
   }
+  setDate(date: any) {
+    if (typeof date === 'string') {
+      date = new Date(date);
+    }
+
+    this.date = {
+      day: date.getDate(),
+      month: date.getMonth() + 1,
+      year: date.getFullYear(),
+      model: date
+    };
+  }
+  setDocBook(index: number) {
+    this.doc.book = index;
+  }
   setRainDay(day: string) {
     this.forecast.rain[day] = !this.forecast.rain[day];
   }
   setInspectorDay(day: string) {
     this.forecast.inspector[day] = !this.forecast.inspector[day];
   }
+  setProgressReason(index: number) {
+    this.progress.reason = index;
+  }
   setState(value: number) {
     this.state.state = value;
+  }
+  setStateReason(index: number) {
+    this.state.reason = index;
+  }
+  setQuality(index: number) {
+    this.evaluation.quality = index;
   }
   private createPhotoArray(length) {
     this.photos = [];
     for (let i = 0; i < length; i++) {
       this.photos.push({
-        id: i,
+        id: `audit${i}`,
         title: '',
         comment: '',
         path: ''
@@ -134,14 +187,15 @@ export class Report {
     let date = new Date();
     this.audits = [];
 
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
       this.audits.push({
         id: i,
         value: 0,
         date: {
           day: date.getDate(),
           month: date.getMonth(),
-          year: date.getFullYear()
+          year: date.getFullYear(),
+          model: date
         }
       });
     }

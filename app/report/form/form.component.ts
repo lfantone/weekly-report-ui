@@ -6,12 +6,14 @@ import appSettings = require('application-settings');
 
 import { Report } from '../report.model';
 import { Translations } from '../../translations';
+import { PickerComponent } from '../picker/picker.component';
 
 @Component({
   selector: 'evz-form',
   templateUrl: 'report/form/form.html',
   styleUrls: ['report/form/form.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  directives: [PickerComponent]
 })
 export class FormComponent implements OnInit {
   @ViewChild('photo0') photo0: ElementRef;
@@ -20,6 +22,14 @@ export class FormComponent implements OnInit {
   @ViewChild('photo3') photo3: ElementRef;
   @ViewChild('photo4') photo4: ElementRef;
   @ViewChild('photo5') photo5: ElementRef;
+  @ViewChild('state') state: PickerComponent;
+  @ViewChild('progress') progress: PickerComponent;
+  @ViewChild('concept') concept: PickerComponent;
+  @ViewChild('quality') quality: PickerComponent;
+  @ViewChild('audit1') audit1: PickerComponent;
+  @ViewChild('audit2') audit2: PickerComponent;
+  @ViewChild('audit3') audit3: PickerComponent;
+  @ViewChild('doc') doc: PickerComponent;
 
   isSegmentedBtnActive: Object;
   name: String;
@@ -49,7 +59,12 @@ export class FormComponent implements OnInit {
   ngOnInit() {
     let key = `report-${this.report.id}`;
     if (appSettings.hasKey(key)) {
-      this.report.setData(JSON.parse(appSettings.getString(key)));
+      let report = JSON.parse(appSettings.getString(key));
+      if (typeof report.date.model === 'string') {
+        report.date.model = new Date(report.date.model);
+      }
+
+      this.report.setData(report);
       this.onSegmentedButtonTap(this.report.state.state);
     }
 
@@ -59,12 +74,44 @@ export class FormComponent implements OnInit {
   }
 
   public goBack() {
-    appSettings.setString(`report-${this.report.id}`, JSON.stringify(this.report));
     this.location.back();
   }
 
   public onDayButtonTap(day: string) {
     this.report.setInspectorDay(day);
+  }
+
+  public onSubmitButtonTap() {
+    this.report.setDate(this.report.date.model);
+    this.report.setAuditsDate(this.report.audits);
+    if (this.state) {
+      this.report.setStateReason(this.state.getSelectedIndex());
+    }
+
+    if (this.progress) {
+      this.report.setProgressReason(this.progress.getSelectedIndex());
+    }
+
+    if (this.audit1 && this.audit2 && this.audit3) {
+      this.report.setAudit(0, this.audit1.getSelectedIndex());
+      this.report.setAudit(1, this.audit2.getSelectedIndex());
+      this.report.setAudit(2, this.audit3.getSelectedIndex());
+    }
+
+    if (this.concept) {
+      this.report.setConcept(this.concept.getSelectedIndex());
+    }
+
+    if (this.doc) {
+      this.report.setDocBook(this.doc.getSelectedIndex());
+    }
+
+    if (this.quality) {
+      this.report.setQuality(this.quality.getSelectedIndex());
+    }
+
+    appSettings.setString(`report-${this.report.id}`, JSON.stringify(this.report));
+    this.goBack();
   }
 
   public onRainButtonTap(day: string) {

@@ -3,7 +3,8 @@ export interface Report {
   date: {
     day: number,
     month: number,
-    year: number
+    year: number,
+    model: Date
   };
   state: {
     state: number,

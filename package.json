@@ -7,10 +7,10 @@
   "repository": "lfantone/weekly-report-ui",
   "nativescript": {
     "id": "org.nativescript.weekly",
-    "tns-android": {
-      "version": "2.0.0"
-    },
     "tns-ios": {
+      "version": "2.1.1"
+    },
+    "tns-android": {
       "version": "2.1.1"
     }
   },

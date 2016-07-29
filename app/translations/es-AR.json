@@ -1,7 +1,8 @@
 {
   "form": {
     "title": "Elegir un elemento",
-    "dateTitle": "Elegir una fecha"
+    "dateTitle": "Elegir una fecha",
+    "submit": "Aceptar"
   },
   "login": {
     "hints": {
@@ -36,7 +37,7 @@
       "regular": "Regular",
       "bad": "Malo",
       "reason": "Razón de estado de la obra",
-      "list": ["Sin Personal", "Ritmo Normal", "Ritmo Lento", "Interrupcioón Tareas", "Lluvias y Consecuencias", "Sin Materiales", "Conflicto Gremial", "Negligencia de empresa", "Corte de Luz", "Corte de Ruta"],
+      "list": ["Sin Personal", "Ritmo Normal", "Ritmo Lento", "Interrupción Tareas", "Lluvias y Consecuencias", "Sin Materiales", "Conflicto Gremial", "Negligencia de empresa", "Corte de Luz", "Corte de Ruta"],
       "comment": "Completar y/o ampliar motivos que conducen al ESTADO actual de la obra según interpreta el inspector"
     },
     "progress": {

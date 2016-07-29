@@ -134,6 +134,16 @@
   color: black;
 }
 
+.submit-button {
+  background-color: #fdca2e;
+  color: black;
+  font-size: 14;
+  font-style: italic;
+  margin-top: 25;
+  padding: 5 30;
+  text-transform: uppercase;
+}
+
 .yellow-btn {
   background-color: #E3DA6A;
 }

@@ -1,0 +1,5 @@
+<StackLayout class="list-picker" orientation="horizontal" *ngFor="let item of list; let i = index" (tap)="onTap(i)">
+  <StackLayout class="item-box" [class.selected]="item.selected">
+      <Label [text]="item.name" textWrap="true"></Label>
+  </StackLayout>
+</StackLayout>

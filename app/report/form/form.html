@@ -5,7 +5,7 @@
   <StackLayout class="body">
 
     <StackLayout *ngIf="name === 'visit'">
-      <DatePicker [day]="report.date.day" [month]="report.date.month" [year]="report.date.year"></DatePicker>
+      <DatePicker [day]="report.date.day" [month]="report.date.month" [year]="report.date.year" [(ngModel)]='report.date.model'></DatePicker>
     </StackLayout>
 
     <StackLayout *ngIf="name === 'state'">
@@ -22,7 +22,7 @@
         </StackLayout>
       </StackLayout>
       <Label class="margin-top" horizontalAlignment="left" [text]="t.get('report.state.reason')" textWrap="true"></Label>
-      <ListPicker [items]="t.get('report.state.list')" [(ngModel)]="report.state.reason"></ListPicker>
+      <evz-picker #state [items]="t.get('report.state.list')" [selectedIndex]="report.state.reason"></evz-picker>
       <Label horizontalAlignment="left" [text]="t.get('report.state.comment')" textWrap="true"></Label>
       <TextView text="" editable="true" [(ngModel)]="report.state.comment"></TextView>
     </StackLayout>
@@ -39,14 +39,14 @@
       </StackLayout>
       <Progress [value]="tender.progress.delta"></Progress>
       <Label class="margin-top" horizontalAlignment="left" [text]="t.get('report.progress.reason')" textWrap="true"></Label>
-      <ListPicker [items]="t.get('report.progress.list')" [(ngModel)]="report.progress.reason"></ListPicker>
+      <evz-picker #progress [items]="t.get('report.progress.list')" [selectedIndex]="report.progress.reason"></evz-picker>
     </StackLayout>
 
     <StackLayout *ngIf="name === 'evaluation'">
       <Label horizontalAlignment="left" [text]="t.get('report.evaluation.concept')" textWrap="true"></Label>
-      <ListPicker [items]="t.get('report.evaluation.list')" [(ngModel)]="report.evaluation.concept"></ListPicker>
+      <evz-picker #concept [items]="t.get('report.evaluation.list')" [selectedIndex]="report.evaluation.concept"></evz-picker>
       <Label horizontalAlignment="left" [text]="t.get('report.evaluation.quality')" textWrap="true"></Label>
-      <ListPicker [items]="t.get('report.evaluation.list')" [(ngModel)]="report.evaluation.quality"></ListPicker>
+      <evz-picker #quality [items]="t.get('report.evaluation.list')" [selectedIndex]="report.evaluation.quality"></evz-picker>
     </StackLayout>
 
     <StackLayout *ngIf="name === 'forecast'">
@@ -77,10 +77,24 @@
         </StackLayout>
       </StackLayout>
       <Label class="dark-background" horizontalAlignment="left" [text]="t.get('report.forecast.audits')" textWrap="true" width="100%"></Label>
-      <StackLayout orientation="vertical" *ngFor="let item of report.audits">
-        <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.audit') + ' ' + (item.id + 1)" textWrap="true" width="100%"></Label>
-        <ListPicker [items]="t.get('report.forecast.list')" [(ngModel)]="report.audits[item.id].value"></ListPicker>
-        <DatePicker [day]="item.date.day" [month]="item.date.month" [year]="item.date.year"></DatePicker>
+      <StackLayout #audits>
+        <StackLayout orientation="vertical">
+          <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.audit') + ' 1'" textWrap="true" width="100%"></Label>
+          <evz-picker #audit1 [items]="t.get('report.forecast.list')" [selectedIndex]="report.audits[0].value"></evz-picker>
+          <DatePicker [day]="report.audits[0].date.day" [month]="report.audits[0].date.month" [year]="report.audits[0].date.year" [(ngModel)]="report.audits[0].date.model"></DatePicker>
+        </StackLayout>
+
+        <StackLayout orientation="vertical">
+          <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.audit') + ' 2'" textWrap="true" width="100%"></Label>
+          <evz-picker #audit2 [items]="t.get('report.forecast.list')" [selectedIndex]="report.audits[1].value"></evz-picker>
+          <DatePicker [day]="report.audits[1].date.day" [month]="report.audits[1].date.month" [year]="report.audits[1].date.year" [(ngModel)]="report.audits[1].date.model"></DatePicker>
+        </StackLayout>
+
+        <StackLayout orientation="vertical">
+          <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.audit') + ' 3'" textWrap="true" width="100%"></Label>
+          <evz-picker #audit3 [items]="t.get('report.forecast.list')" [selectedIndex]="report.audits[2].value"></evz-picker>
+          <DatePicker [day]="report.audits[2].date.day" [month]="report.audits[2].date.month" [year]="report.audits[2].date.year" [(ngModel)]="report.audits[2].date.model"></DatePicker>
+        </StackLayout>
       </StackLayout>
     </StackLayout>
 
@@ -90,19 +104,61 @@
         <TextField [hint]="t.get('report.doc.quantity')" horizontalAlignment="right" [text]="report.doc.quantity" keyboardType="phone" [(ngModel)]="report.doc.quantity"></TextField>
       </StackLayout>
       <Label horizontalAlignment="left" [text]="t.get('report.doc.book')" textWrap="true"></Label>
-      <ListPicker [items]="t.get('report.doc.list')" [(ngModel)]="report.doc.book"></ListPicker>
+      <evz-picker #doc [items]="t.get('report.doc.list')" [selectIndex]="report.doc.book"></evz-picker>
     </StackLayout>
 
     <StackLayout *ngIf="name === 'photos'">
-      <StackLayout orientation="horizontal" *ngFor="let item of report.photos">
-        <Image id="photo{{ item.id }}" class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+      <StackLayout orientation="horizontal">
+        <Image #photo0 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
         <StackLayout class="input-box">
-          <TextField [hint]="t.get('report.photo.title')" [text]="item.title" [(ngModel)]="report.photos[item.id].title"></TextField>
-          <TextField [hint]="t.get('report.photo.comment')" [text]="item.comment" [(ngModel)]="report.photos[item.id].comment"></TextField>
+          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[0].title"></TextField>
+          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[0].comment"></TextField>
         </StackLayout>
-        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[item.id])"></Button>
+        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[0])"></Button>
+      </StackLayout>
+      <StackLayout orientation="horizontal">
+        <Image #photo1 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <StackLayout class="input-box">
+          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[1].title"></TextField>
+          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[1].comment"></TextField>
+        </StackLayout>
+        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[1])"></Button>
+      </StackLayout>
+      <StackLayout orientation="horizontal">
+        <Image #photo2 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <StackLayout class="input-box">
+          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[2].title"></TextField>
+          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[2].comment"></TextField>
+        </StackLayout>
+        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[2])"></Button>
+      </StackLayout>
+      <StackLayout orientation="horizontal">
+        <Image #photo3 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <StackLayout class="input-box">
+          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[3].title"></TextField>
+          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[3].comment"></TextField>
+        </StackLayout>
+        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[3])"></Button>
+      </StackLayout>
+      <StackLayout orientation="horizontal">
+        <Image #photo4 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <StackLayout class="input-box">
+          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[4].title"></TextField>
+          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[4].comment"></TextField>
+        </StackLayout>
+        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[4])"></Button>
+      </StackLayout>
+      <StackLayout orientation="horizontal">
+        <Image #photo5 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <StackLayout class="input-box">
+          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[5].title"></TextField>
+          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[5].comment"></TextField>
+        </StackLayout>
+        <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[5])"></Button>
       </StackLayout>
     </StackLayout>
+
+    <Button class="submit-button" [text]="t.get('form.submit')" (tap)="onSubmitButtonTap()"></Button>
 
   </StackLayout>
 </ScrollView>
