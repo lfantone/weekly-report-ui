@@ -104,7 +104,7 @@
         <TextField [hint]="t.get('report.doc.quantity')" horizontalAlignment="right" [text]="report.doc.quantity" keyboardType="phone" [(ngModel)]="report.doc.quantity"></TextField>
       </StackLayout>
       <Label horizontalAlignment="left" [text]="t.get('report.doc.book')" textWrap="true"></Label>
-      <evz-picker #doc [items]="t.get('report.doc.list')" [selectIndex]="report.doc.book"></evz-picker>
+      <evz-picker #doc [items]="t.get('report.doc.list')" [selectedIndex]="report.doc.book"></evz-picker>
     </StackLayout>
 
     <StackLayout *ngIf="name === 'photos'">

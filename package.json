@@ -15,7 +15,7 @@
     }
   },
   "scripts": {
-    "build.android": "tns build android --release --key-store-path my-release-key.keystore --key-store-password Chapelco123+ --key-store-alias mykey --key-store-alias-password Chapelco123+ && cp platforms/android/build/outputs/apk/weeklyreportui-release.apk ~/Desktop",
+    "build.android": "tns build android --release --key-store-path my-release-key.keystore --key-store-password Chapelco123+ --key-store-alias mykey --key-store-alias-password Chapelco123+ && cp platforms/android/build/outputs/apk/weekly-release.apk ~/Desktop",
     "run.android": "tns run android --emulator",
     "run.ios": "tns run ios --emulator",
     "sync.android": "tns livesync android --emulator --watch",
