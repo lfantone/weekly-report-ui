@@ -11,9 +11,9 @@
     <StackLayout *ngIf="name === 'state'">
       <StackLayout>
         <StackLayout orientation="horizontal">
-          <Button class="segmented-btn green-btn" horizontalAlignment="left" [class.segmented-btn-active]="isSegmentedBtnActive[90000]" (tap)="onSegmentedButtonTap(90000)" [text]="t.get('report.state.good')"></Button>
-          <Button class="segmented-btn yellow-btn" horizontalAlignment="center" [class.segmented-btn-active]="isSegmentedBtnActive[90001]" (tap)="onSegmentedButtonTap(90001)" [text]="t.get('report.state.regular')"></Button>
-          <Button class="segmented-btn red-btn" horizontalAlignment="right" [class.segmented-btn-active]="isSegmentedBtnActive[90002]" (tap)="onSegmentedButtonTap(90002)" [text]="t.get('report.state.bad')"></Button>
+          <Button class="segmented-btn green-btn" horizontalAlignment="left" [class.segmented-btn-active]="isSegmentedBtnActive[90000]" (tap)="onSegmentedButtonTap(90000)" text="Bueno"></Button>
+          <Button class="segmented-btn yellow-btn" horizontalAlignment="center" [class.segmented-btn-active]="isSegmentedBtnActive[90001]" (tap)="onSegmentedButtonTap(90001)" text="Regular"></Button>
+          <Button class="segmented-btn red-btn" horizontalAlignment="right" [class.segmented-btn-active]="isSegmentedBtnActive[90002]" (tap)="onSegmentedButtonTap(90002)" text="Malo"></Button>
         </StackLayout>
         <StackLayout orientation="horizontal">
           <Label class="border-bottom" [class.border-bottom-active]="isSegmentedBtnActive[90000]" horizontalAlignment="left"></Label>
@@ -21,78 +21,78 @@
           <Label class="border-bottom" [class.border-bottom-active]="isSegmentedBtnActive[90002]" horizontalAlignment="right"></Label>
         </StackLayout>
       </StackLayout>
-      <Label class="margin-top" horizontalAlignment="left" [text]="t.get('report.state.reason')" textWrap="true"></Label>
-      <evz-picker #state [items]="t.get('report.state.list')" [selectedIndex]="report.state.reason"></evz-picker>
-      <Label horizontalAlignment="left" [text]="t.get('report.state.comment')" textWrap="true"></Label>
+      <Label class="margin-top" horizontalAlignment="left" text="Razón de estado de la obra" textWrap="true"></Label>
+      <evz-picker #state [items]="stateList" [selectedIndex]="report.state.reason"></evz-picker>
+      <Label horizontalAlignment="left" text="Completar y/o ampliar motivos que conducen al ESTADO actual de la obra según interpreta el inspector" textWrap="true"></Label>
       <TextView text="" editable="true" [(ngModel)]="report.state.comment"></TextView>
     </StackLayout>
 
     <StackLayout *ngIf="name === 'progress'">
       <StackLayout orientation="horizontal">
-        <Label class="progress-label" horizontalAlignment="left" [text]="t.get('report.progress.last')" textWrap="true" width="50%"></Label>
+        <Label class="progress-label" horizontalAlignment="left" text="Avance último certificado" textWrap="true" width="50%"></Label>
         <Label horizontalAlignment="right" [text]="tender.progress.last" textWrap="true" width="50%"></Label>
       </StackLayout>
       <Progress [value]="tender.progress.last"></Progress>
       <StackLayout orientation="horizontal">
-        <Label class="progress-label" horizontalAlignment="left" [text]="t.get('report.progress.delta')" textWrap="true" width="50%"></Label>
+        <Label class="progress-label" horizontalAlignment="left" text="Certificación acumulada" textWrap="true" width="50%"></Label>
         <Label horizontalAlignment="right" [text]="tender.progress.delta" textWrap="true" width="50%"></Label>
       </StackLayout>
       <Progress [value]="tender.progress.delta"></Progress>
-      <Label class="margin-top" horizontalAlignment="left" [text]="t.get('report.progress.reason')" textWrap="true"></Label>
-      <evz-picker #progress [items]="t.get('report.progress.list')" [selectedIndex]="report.progress.reason"></evz-picker>
+      <Label class="margin-top" horizontalAlignment="left" text="Razón de avance de la obra" textWrap="true"></Label>
+      <evz-picker #progress [items]="progressList" [selectedIndex]="report.progress.reason"></evz-picker>
     </StackLayout>
 
     <StackLayout *ngIf="name === 'evaluation'">
-      <Label horizontalAlignment="left" [text]="t.get('report.evaluation.concept')" textWrap="true"></Label>
-      <evz-picker #concept [items]="t.get('report.evaluation.list')" [selectedIndex]="report.evaluation.concept"></evz-picker>
-      <Label horizontalAlignment="left" [text]="t.get('report.evaluation.quality')" textWrap="true"></Label>
-      <evz-picker #quality [items]="t.get('report.evaluation.list')" [selectedIndex]="report.evaluation.quality"></evz-picker>
+      <Label horizontalAlignment="left" text="Concepto de la obra" textWrap="true"></Label>
+      <evz-picker #concept [items]="evaluationList" [selectedIndex]="report.evaluation.concept"></evz-picker>
+      <Label horizontalAlignment="left" text="Calidad de la obra" textWrap="true"></Label>
+      <evz-picker #quality [items]="evaluationList" [selectedIndex]="report.evaluation.quality"></evz-picker>
     </StackLayout>
 
     <StackLayout *ngIf="name === 'forecast'">
       <StackLayout>
-        <Label class="date-title" horizontalAlignment="left" [text]="t.get('report.forecast.visit')" textWrap="true"></Label>
+        <Label class="date-title" horizontalAlignment="left" text="Última visita a la obra" textWrap="true"></Label>
         <Label class="date" horizontalAlignment="left" [text]="tender.lastReport" textWrap="true"></Label>
-        <Label class="dark-background" horizontalAlignment="left" [text]="t.get('report.forecast.inspector')" textWrap="true" width="100%"></Label>
-        <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.days')" textWrap="true" width="100%"></Label>
+        <Label class="dark-background" horizontalAlignment="left" text="Visita Inspector" textWrap="true" width="100%"></Label>
+        <Label class="light-background" horizontalAlignment="left" text="Seleccione los días" textWrap="true" width="100%"></Label>
         <StackLayout orientation="horizontal">
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.monday" [text]="t.get('report.forecast.day.monday')" (tap)="onDayButtonTap('monday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.tuesday" [text]="t.get('report.forecast.day.tuesday')" (tap)="onDayButtonTap('tuesday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.wednesday" [text]="t.get('report.forecast.day.wednesday')" (tap)="onDayButtonTap('wednesday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.thursday" [text]="t.get('report.forecast.day.thursday')" (tap)="onDayButtonTap('thursday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.friday" [text]="t.get('report.forecast.day.friday')" (tap)="onDayButtonTap('friday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.saturday" [text]="t.get('report.forecast.day.saturday')" (tap)="onDayButtonTap('saturday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.sunday" [text]="t.get('report.forecast.day.sunday')" (tap)="onDayButtonTap('sunday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.monday" text="L" (tap)="onDayButtonTap('monday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.tuesday" text="M" (tap)="onDayButtonTap('tuesday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.wednesday" text="M" (tap)="onDayButtonTap('wednesday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.thursday" text="J" (tap)="onDayButtonTap('thursday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.friday" text="V" (tap)="onDayButtonTap('friday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.saturday" text="S" (tap)="onDayButtonTap('saturday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.inspector.sunday" text="D" (tap)="onDayButtonTap('sunday')"></Button>
         </StackLayout>
-        <Label class="dark-background" horizontalAlignment="left" [text]="t.get('report.forecast.rain')" textWrap="true" width="100%"></Label>
-        <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.days')" textWrap="true" width="100%"></Label>
+        <Label class="dark-background" horizontalAlignment="left" text="Lluvia" textWrap="true" width="100%"></Label>
+        <Label class="light-background" horizontalAlignment="left" text="Seleccione los días" textWrap="true" width="100%"></Label>
         <StackLayout orientation="horizontal">
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.monday" [text]="t.get('report.forecast.day.monday')" (tap)="onRainButtonTap('monday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.tuesday" [text]="t.get('report.forecast.day.tuesday')" (tap)="onRainButtonTap('tuesday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.wednesday" [text]="t.get('report.forecast.day.wednesday')" (tap)="onRainButtonTap('wednesday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.thursday" [text]="t.get('report.forecast.day.thursday')" (tap)="onRainButtonTap('thursday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.friday" [text]="t.get('report.forecast.day.friday')" (tap)="onRainButtonTap('friday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.saturday" [text]="t.get('report.forecast.day.saturday')" (tap)="onRainButtonTap('saturday')"></Button>
-          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.sunday" [text]="t.get('report.forecast.day.sunday')" (tap)="onRainButtonTap('sunday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.monday" text="L" (tap)="onRainButtonTap('monday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.tuesday" text="M" (tap)="onRainButtonTap('tuesday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.wednesday" text="M" (tap)="onRainButtonTap('wednesday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.thursday" text="J" (tap)="onRainButtonTap('thursday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.friday" text="V" (tap)="onRainButtonTap('friday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.saturday" text="S" (tap)="onRainButtonTap('saturday')"></Button>
+          <Button class="date-btn" [class.day-btn-active]="report.forecast.rain.sunday" text="D" (tap)="onRainButtonTap('sunday')"></Button>
         </StackLayout>
       </StackLayout>
-      <Label class="dark-background" horizontalAlignment="left" [text]="t.get('report.forecast.audits')" textWrap="true" width="100%"></Label>
-      <StackLayout #audits>
+      <Label class="dark-background" horizontalAlignment="left" text="Auditorías/Visitas" textWrap="true" width="100%"></Label>
+      <StackLayout>
         <StackLayout orientation="vertical">
-          <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.audit') + ' 1'" textWrap="true" width="100%"></Label>
-          <evz-picker #audit1 [items]="t.get('report.forecast.list')" [selectedIndex]="report.audits[0].value"></evz-picker>
+          <Label class="light-background" horizontalAlignment="left" text="Auditoría 1" textWrap="true" width="100%"></Label>
+          <evz-picker #audit1 [items]="auditList" [selectedIndex]="report.audits[0].value"></evz-picker>
           <DatePicker [day]="report.audits[0].date.day" [month]="report.audits[0].date.month" [year]="report.audits[0].date.year" [(ngModel)]="report.audits[0].date.model"></DatePicker>
         </StackLayout>
 
         <StackLayout orientation="vertical">
-          <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.audit') + ' 2'" textWrap="true" width="100%"></Label>
-          <evz-picker #audit2 [items]="t.get('report.forecast.list')" [selectedIndex]="report.audits[1].value"></evz-picker>
+          <Label class="light-background" horizontalAlignment="left" text="Auditoría 2" textWrap="true" width="100%"></Label>
+          <evz-picker #audit2 [items]="auditList" [selectedIndex]="report.audits[1].value"></evz-picker>
           <DatePicker [day]="report.audits[1].date.day" [month]="report.audits[1].date.month" [year]="report.audits[1].date.year" [(ngModel)]="report.audits[1].date.model"></DatePicker>
         </StackLayout>
 
         <StackLayout orientation="vertical">
-          <Label class="light-background" horizontalAlignment="left" [text]="t.get('report.forecast.audit') + ' 3'" textWrap="true" width="100%"></Label>
-          <evz-picker #audit3 [items]="t.get('report.forecast.list')" [selectedIndex]="report.audits[2].value"></evz-picker>
+          <Label class="light-background" horizontalAlignment="left" text="Auditoría 3'" textWrap="true" width="100%"></Label>
+          <evz-picker #audit3 [items]="auditList" [selectedIndex]="report.audits[2].value"></evz-picker>
           <DatePicker [day]="report.audits[2].date.day" [month]="report.audits[2].date.month" [year]="report.audits[2].date.year" [(ngModel)]="report.audits[2].date.model"></DatePicker>
         </StackLayout>
       </StackLayout>
@@ -100,65 +100,65 @@
 
     <StackLayout *ngIf="name === 'doc'">
       <StackLayout class="doc-quantity-box" orientation="horizontal">
-        <Label class="doc-quantity-title" horizontalAlignment="left" [text]="t.get('report.doc.quantity')" textWrap="true"></Label>
-        <TextField [hint]="t.get('report.doc.quantity')" horizontalAlignment="right" [text]="report.doc.quantity" keyboardType="phone" [(ngModel)]="report.doc.quantity"></TextField>
+        <Label class="doc-quantity-title" horizontalAlignment="left" text="Cantidad de Órdenes de Servicio" textWrap="true"></Label>
+        <TextField hint="Cantidad de Órdenes de Servicio" horizontalAlignment="right" [text]="report.doc.quantity" keyboardType="phone" [(ngModel)]="report.doc.quantity"></TextField>
       </StackLayout>
-      <Label horizontalAlignment="left" [text]="t.get('report.doc.book')" textWrap="true"></Label>
-      <evz-picker #doc [items]="t.get('report.doc.list')" [selectedIndex]="report.doc.book"></evz-picker>
+      <Label horizontalAlignment="left" text="Libro de Obra" textWrap="true"></Label>
+      <evz-picker #doc [items]="docList" [selectedIndex]="report.doc.book"></evz-picker>
     </StackLayout>
 
     <StackLayout *ngIf="name === 'photos'">
       <StackLayout orientation="horizontal">
-        <Image #photo0 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <Image #photo0 class="thumbnail" [src]="report.photos[0].path" horizontalAlignment="left" height="80" width="40"></Image>
         <StackLayout class="input-box">
-          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[0].title"></TextField>
-          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[0].comment"></TextField>
+          <TextField hint="Título Foto" [text]="report.photos.title" [(ngModel)]="report.photos[0].title"></TextField>
+          <TextField hint="Comentario de la foto" [text]="report.photos.comment" [(ngModel)]="report.photos[0].comment"></TextField>
         </StackLayout>
         <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[0])"></Button>
       </StackLayout>
       <StackLayout orientation="horizontal">
-        <Image #photo1 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <Image #photo1 class="thumbnail" [src]="report.photos[1].path" horizontalAlignment="left" height="80" width="40"></Image>
         <StackLayout class="input-box">
-          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[1].title"></TextField>
-          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[1].comment"></TextField>
+          <TextField hint="Título Foto" [text]="report.photos.title" [(ngModel)]="report.photos[1].title"></TextField>
+          <TextField hint="Comentario de la foto" [text]="report.photos.comment" [(ngModel)]="report.photos[1].comment"></TextField>
         </StackLayout>
         <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[1])"></Button>
       </StackLayout>
       <StackLayout orientation="horizontal">
-        <Image #photo2 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <Image #photo2 class="thumbnail" [src]="report.photos[2].path" horizontalAlignment="left" height="80" width="40"></Image>
         <StackLayout class="input-box">
-          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[2].title"></TextField>
-          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[2].comment"></TextField>
+          <TextField hint="Título Foto" [text]="report.photos.title" [(ngModel)]="report.photos[2].title"></TextField>
+          <TextField hint="Comentario de la foto" [text]="report.photos.comment" [(ngModel)]="report.photos[2].comment"></TextField>
         </StackLayout>
         <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[2])"></Button>
       </StackLayout>
       <StackLayout orientation="horizontal">
-        <Image #photo3 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <Image #photo3 class="thumbnail" [src]="report.photos[3].path" horizontalAlignment="left" height="80" width="40"></Image>
         <StackLayout class="input-box">
-          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[3].title"></TextField>
-          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[3].comment"></TextField>
+          <TextField hint="Título Foto" [text]="report.photos.title" [(ngModel)]="report.photos[3].title"></TextField>
+          <TextField hint="Comentario de la foto" [text]="report.photos.comment" [(ngModel)]="report.photos[3].comment"></TextField>
         </StackLayout>
         <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[3])"></Button>
       </StackLayout>
       <StackLayout orientation="horizontal">
-        <Image #photo4 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <Image #photo4 class="thumbnail" [src]="report.photos[4].path" horizontalAlignment="left" height="80" width="40"></Image>
         <StackLayout class="input-box">
-          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[4].title"></TextField>
-          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[4].comment"></TextField>
+          <TextField hint="Título Foto" [text]="report.photos.title" [(ngModel)]="report.photos[4].title"></TextField>
+          <TextField hint="Comentario de la foto" [text]="report.photos.comment" [(ngModel)]="report.photos[4].comment"></TextField>
         </StackLayout>
         <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[4])"></Button>
       </StackLayout>
       <StackLayout orientation="horizontal">
-        <Image #photo5 class="thumbnail" src="res://noimage" horizontalAlignment="left" height="80" width="40"></Image>
+        <Image #photo5 class="thumbnail" [src]="report.photos[5].path" horizontalAlignment="left" height="80" width="40"></Image>
         <StackLayout class="input-box">
-          <TextField [hint]="t.get('report.photo.title')" [text]="report.photos.title" [(ngModel)]="report.photos[5].title"></TextField>
-          <TextField [hint]="t.get('report.photo.comment')" [text]="report.photos.comment" [(ngModel)]="report.photos[5].comment"></TextField>
+          <TextField hint="Título Foto" [text]="report.photos.title" [(ngModel)]="report.photos[5].title"></TextField>
+          <TextField hint="Comentario de la foto" [text]="report.photos.comment" [(ngModel)]="report.photos[5].comment"></TextField>
         </StackLayout>
         <Button class="edit-btn material-icon" text="&#xf158;" (tap)="onStartCamera(report.photos[5])"></Button>
       </StackLayout>
     </StackLayout>
 
-    <Button class="submit-button" [text]="t.get('form.submit')" (tap)="onSubmitButtonTap()"></Button>
+    <Button class="submit-button" text="Aceptar" (tap)="onSubmitButtonTap()"></Button>
 
   </StackLayout>
 </ScrollView>

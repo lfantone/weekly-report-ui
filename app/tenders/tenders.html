@@ -1,4 +1,6 @@
-<ActionBar android.icon="res://title" android.iconVisibility="always" [title]="t.get('tenders.title')"></ActionBar>
+<ActionBar android.icon="res://title" android.iconVisibility="always" [title]="t.get('tenders.title')">
+  <ActionItem (tap)="onLogout()" ios.systemIcon="16" ios.position="right" text="Cerrar sesión" android.position="popup"></ActionItem>
+</ActionBar>
 <PullToRefresh #refresh (refresh)="refreshList($event)">
   <ScrollView>
     <StackLayout class="body">

@@ -19,14 +19,18 @@ export class PickerComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.items) {
+      this.items = [];
+    }
+
     if (this.items.length > 0) {
       for (let i = 0; i < this.items.length; i++) {
         this.list.push({name: this.items[i], selected: false});
       }
-    }
 
-    if (this.selectedIndex >= 0 && this.selectedIndex <= this.items.length) {
-      this.list[this.selectedIndex].selected = true;
+      if (this.selectedIndex >= 0 && this.selectedIndex <= this.items.length) {
+        this.list[this.selectedIndex].selected = true;
+      }
     }
   }
 

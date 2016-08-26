@@ -67,7 +67,7 @@
       "rain": "Lluvia",
       "audits": "Auditorías/Visitas",
       "audit": "Auditoría",
-      "list": ["Estructuras", "Instalaciones", "Supervisor", "Coord. Programa", "Nación", "UCO", "Autoridades"]
+      "list": ["Ninguna", "Estructuras", "Instalaciones", "Supervisor", "Coord. Programa", "Nación", "UCO", "Autoridades"]
     },
     "doc": {
       "quantity": "Cantidad de Órdenes de Servicio",

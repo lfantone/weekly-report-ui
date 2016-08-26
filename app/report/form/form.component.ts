@@ -5,7 +5,7 @@ import cameraModule = require('camera');
 import appSettings = require('application-settings');
 
 import { Report } from '../report.model';
-import { Translations } from '../../translations';
+// import { Translations } from '../../translations';
 import { PickerComponent } from '../picker/picker.component';
 
 @Component({
@@ -34,9 +34,14 @@ export class FormComponent implements OnInit {
   isSegmentedBtnActive: Object;
   name: String;
   report: Report;
-  t: Object;
+  // t: any;
   tender: any;
   title: String;
+  stateList: String[];
+  progressList: String[];
+  evaluationList: String[];
+  auditList: String[];
+  docList: String[];
 
   constructor(private location: Location, private params: RouteParams) {
     let id = parseInt(params.get('id'), 10);
@@ -53,7 +58,8 @@ export class FormComponent implements OnInit {
       progress: {}
     };
 
-    this.t = new Translations();
+    // this.t = new Translations();
+    this.initList();
   }
 
   ngOnInit() {
@@ -65,6 +71,7 @@ export class FormComponent implements OnInit {
       }
 
       this.report.setData(report);
+      // this.setImagePath(report.photos);
       this.onSegmentedButtonTap(this.report.state.state);
     }
 
@@ -72,7 +79,13 @@ export class FormComponent implements OnInit {
       this.tender = JSON.parse(appSettings.getString('tender'));
     }
   }
-
+  private initList() {
+    this.stateList = ['Sin Personal', 'Ritmo Normal', 'Ritmo Lento', 'Interrupción Tareas', 'Lluvias y Consecuencias', 'Sin Materiales', 'Conflicto Gremial', 'Negligencia de empresa', 'Corte de Luz', 'Corte de Ruta'];
+    this.progressList = ['Sin Avance', 'Muy Bueno', 'Bueno', 'Normal', 'Regular', 'Malo'];
+    this.evaluationList = ['Regular', 'Muy Bueno', 'Bueno', 'Normal', 'Malo'];
+    this.auditList = ['Ninguna', 'Estructuras', 'Instalaciones', 'Supervisor', 'Coord. Programa', 'Nación', 'UCO', 'Autoridades'];
+    this.docList = ['Si', 'No', 'Incompleto'];
+  }
   public goBack() {
     this.location.back();
   }
@@ -119,7 +132,7 @@ export class FormComponent implements OnInit {
   }
 
   public onStartCamera(item) {
-    let image = this[`photo${item.id}`].nativeElement;
+    let image = this[item.id].nativeElement;
     cameraModule.takePicture({}).then(picture => {
       image.imageSource = picture;
       item.path = picture.toBase64String('jpeg');
@@ -138,4 +151,12 @@ export class FormComponent implements OnInit {
     this.isSegmentedBtnActive[id] = !this.isSegmentedBtnActive[id];
     this.report.setState(id);
   }
+
+  // private setImagePath(photos: any) {
+  //   for (let i = 0; i < photos.length; i++) {
+  //     let photo = photos[i];
+  //     let image = this[photo.id].nativeElement;
+  //     image.imageSource.loadFromBase64(photo.path);
+  //   }
+  // }
 }

@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(user) {
+  login(user: User) {
     this._userService.login(user)
     .subscribe(
       (response) => {

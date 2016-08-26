@@ -1,4 +1,5 @@
 export const Audits = [
+  { key: -1, value: 'Ninguna'},
   { key: 90021, value: 'Estructuras' },
   { key: 90022, value: 'Instalaciones' },
   { key: 90023, value: 'Supervisor' },

@@ -51,7 +51,10 @@ export class ReportService {
 
     if (report.audits) {
       for (let i = 0; i < report.audits.length; i++) {
-        r.audits[i].value = Audits[report.audits[i].value].key;
+        let audit = report.audits[i];
+        if (audit.value !== 'Ninguna') {
+          r.audits[i].value = Audits[report.audits[i].value].key;
+        }
       }
     }
 

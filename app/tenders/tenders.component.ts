@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/find';
+import appSettings = require('application-settings');
 
 import { TenderService } from './tender.service';
 import { TenderListComponent } from './list/list.component';
@@ -19,7 +21,7 @@ export class TendersComponent implements OnInit {
   t: Object;
   tenders: Observable<Tender[]>;
   isLoading: boolean;
-  constructor(private tenderService: TenderService) {
+  constructor(private tenderService: TenderService, private _router: Router) {
     this.t = new Translations();
   }
 
@@ -32,5 +34,11 @@ export class TendersComponent implements OnInit {
     let pullRefresh = args.object;
     this.tenders = this.tenderService
       .fetch(pullRefresh);
+  }
+
+  onLogout() {
+    appSettings.remove('token');
+    appSettings.remove('user');
+    this._router.navigate(['Login']);
   }
 }

@@ -176,10 +176,10 @@ export class Report {
     this.photos = [];
     for (let i = 0; i < length; i++) {
       this.photos.push({
-        id: `audit${i}`,
+        id: `photo${i}`,
         title: '',
         comment: '',
-        path: ''
+        path: 'res://noimage'
       });
     }
   }
@@ -189,7 +189,7 @@ export class Report {
 
     for (let i = 0; i < length; i++) {
       this.audits.push({
-        id: i,
+        id: `autid${i}`,
         value: 0,
         date: {
           day: date.getDate(),

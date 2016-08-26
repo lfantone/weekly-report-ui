@@ -53,7 +53,8 @@ export class ReportComponent implements OnInit {
   }
 
   public onSaveButtonTap() {
-    appSettings.setString(`report-${this.report.id}`, JSON.stringify(this.report));
+    let report = appSettings.getString(`report-${this.report.id}`);
+    appSettings.setString(`report-${this.report.id}`, report);
     alert('El reporte fue guardado');
     this.goBack();
   }

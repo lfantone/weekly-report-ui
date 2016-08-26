@@ -15,7 +15,9 @@ export class UserService {
     let headers = new Headers({'Content-Type': 'application/json'});
 
     return this.http.post(this.url, body, {headers})
-      .map((res: Response) => res.json())
+      .map((res: Response) => {
+        return res.json();
+      })
       .catch((error: any) => {
         let errMsg = (error.message) ? error.message :
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
